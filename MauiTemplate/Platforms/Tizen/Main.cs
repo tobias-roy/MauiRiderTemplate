@@ -2,7 +2,7 @@ using Microsoft.Maui;
 using Microsoft.Maui.Hosting;
 using System;
 
-namespace Notes
+namespace MauiTemplate
 {
     internal class Program : MauiApplication
     {

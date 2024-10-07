@@ -1,4 +1,4 @@
-﻿namespace Notes
+﻿namespace MauiTemplate
 {
     public partial class MainPage : ContentPage
     {
