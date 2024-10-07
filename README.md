@@ -1,5 +1,5 @@
 
-# Prerequisites for ARM Android Maui Builds
+# Prerequisites for ARM Android Maui Builds with Rider IDE
 
 This guide provides the setup required to run Android SDK projects in the Rider IDE on a MacBook with an ARM architecture, this was done specifically for the MacBook M1 Pro, but should apply to any ARM architechture MacBook.
 
