@@ -61,7 +61,7 @@ Nuget Package Prerequisites for the Visual Studio Template project is:
 
 ## Troubleshooting
 
-If you encounter an error, follow these steps (replace `YOURUSERNAME` with your own username):
+If you encounter an error, try following these steps (replace `YOURUSERNAME` with your own username):
 
 1. Download the **Command Line Tools** for Mac from [Android Studio Command Line Tools](https://developer.android.com/studio/).
 2. Extract the downloaded file to `/YOURUSERNAME/Library/Android/sdk/cmdline-tools`.
@@ -79,6 +79,20 @@ You should now have the following structure:
 ```
 
 - If the `bin` folder doesn’t exist, create it.
+
+### JAVA Error
+
+If you have encountered a JAVA error similair to this:
+java -v 
+	/Users/USERNAME/.asdf/shims/java: line 3: /opt/homebrew/Cellar/asdf/0.13.1/libexec/bin/asdf: 
+	No such file or directory /Users/USERNAME/.asdf/shims/java: line 3: exec: /opt/homebrew/Cellar/asdf/0.13.1/libexec/bin/asdf: cannot execute: No such file or directory
+
+
+Try running the following:
+```
+asdf reshim
+```
+
 
 ### Accept SDK Licenses
 
@@ -99,6 +113,8 @@ You should now have the following structure:
    ```bash
    ./sdkmanager "platforms;android-34"
    ```
+
+
 
 ### Final Step
 You should now be able to build and run your project successfully.
