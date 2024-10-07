@@ -17,6 +17,20 @@ brew install --cask rider
 ```
 *Note: Xcode is not supported via Homebrew, use the official App Store instead.*
 
+After installing Xcode run this command in your terminal
+```
+sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
+```
+- Verify that the path is indeed correct by running the following command
+```
+xcode-select -p
+```
+- Run the following command and accept xcode licenses if you havent already
+```
+sudo xcodebuild -license
+```
+- Open XCode and download the IOS Simulation Runtime module, this should appear when you try to create a new project and choose the iOS template.
+
 ### Java Development Kit (JDK):
 As of **22.09.24**, the version used is **17.0.12**.
 - [Download JDK](https://www.oracle.com/in/java/technologies/downloads/#java17)
@@ -34,24 +48,8 @@ As of **22.09.24**, the version used is **17.0.12**.
 ## Steps to Create and Run the Visual Studio Template MAUI Project
 This Projects master branch is similair to the Visual Studio Template as of 7/10/2024
 
-1. Open Visual Studio on a Windows PC and create the Maui project template.
-2. Create a repository and push it to github
-3. Pull the project on your macbook
-4. Open the solution in Rider and try to run it, if it fails continue with steps 5 through 11
-5. Run this command in your terminal
-```
-sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
-```
-7. Verify that the path is indeed correct by running the following command
-```
-xcode-select -p
-```
-9. Run the following command and accept xcode licenses if you havent already
-```
-sudo xcodebuild -license
-```
-10. Open XCode and download the IOS Simulation Runtime module, this should appear when you try to create a new project and choose the iOS template.
-11. Try to run the project again.
+1. Pull this project on your macbook
+2. Open the solution in Rider and run it
 
 Nuget Package Prerequisites for the Visual Studio Template project is:
 - Microsoft.Maui.Controls
