@@ -1,21 +1,45 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="TipCalculator.MainPage"
-             Title="Tip Calculator">
+             Title="Tip Calculator"
+             >
+    <ContentPage.Behaviors> 
+        <toolkit:StatusBarBehavior StatusBarColor="White" StatusBarStyle="DarkContent"> 
+        </toolkit:StatusBarBehavior>
+    </ContentPage.Behaviors>
 
-        <VerticalStackLayout
+    <VerticalStackLayout
             Padding="30,0"
             Spacing="20">
-            <Label Margin="0,10,0,0" FontAttributes="Bold">Bill Amount:</Label>
-            <Entry x:Name="BillEntry" Placeholder="Enter bill amount" Keyboard="Numeric" />
+            <Label Margin="0,10,0,0" FontSize="20" FontAttributes="Bold">Bill Amount:</Label>
+            <Frame CornerRadius="5" Padding="0" Margin="0">
+                <Entry x:Name="BillEntry" Placeholder="Enter bill amount" Keyboard="Numeric" />
+            </Frame>
             <Label x:Name="TipPercentageLabel">Tip Percentage: </Label>
             <Slider x:Name="TipSlider" Maximum="100" Minimum="0" Value="15" />
             <Label x:Name="TipAmountLabel">Tip: </Label>
             <Label x:Name="TotalLabel">Total: </Label>
-            <Button x:Name="LowPercentageBtn" Text="15%" />
-            <Button x:Name="HighPercentageBtn" Text="20%" />
-            <Button x:Name="RoundDownBtn" Text="Round Down" />
-            <Button x:Name="RoundUpBtn" Text="Round Up" />
+            <Button x:Name="LowPercentageBtn" Text="15%">
+                <Button.Shadow>
+                    <Shadow Brush="Black" Opacity="0.4" Offset="2,2" Radius="2"/>
+                </Button.Shadow>
+            </Button>
+            <Button x:Name="HighPercentageBtn" Text="20%">
+            <Button.Shadow>
+                <Shadow Brush="Black" Opacity="0.4" Offset="2,2" Radius="2"/>
+            </Button.Shadow>
+            </Button>
+            <Button x:Name="RoundDownBtn" Text="Round Down">
+                <Button.Shadow>
+                    <Shadow Brush="Black" Opacity="0.4" Offset="2,2" Radius="2"/>
+                </Button.Shadow>
+            </Button>
+            <Button x:Name="RoundUpBtn" Text="Round Up">
+                <Button.Shadow>
+                    <Shadow Brush="Black" Opacity="0.4" Offset="2,2" Radius="2"/>
+                </Button.Shadow>
+            </Button>
         </VerticalStackLayout>
 </ContentPage>
