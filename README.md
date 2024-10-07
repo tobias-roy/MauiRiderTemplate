@@ -1,0 +1,108 @@
+
+# Prerequisites for ARM Android Maui Builds
+
+This guide provides the setup required to run Android SDK projects in the Rider IDE on a MacBook with an ARM architecture, this was done specifically for the MacBook M1 Pro, but should apply to any ARM architechture MacBook.
+
+## Software to Install
+
+### DMG:
+- **[Rider](https://www.jetbrains.com/rider/download/#section=mac)**
+- **[Android Studio](https://developer.android.com/studio/)**
+- **[Xcode](https://apps.apple.com/us/app/xcode/id497799835?mt=12)**
+
+### Brew:
+```bash
+brew install --cask android-studio
+brew install --cask rider
+```
+*Note: Xcode is not supported via Homebrew, use the official App Store instead.*
+
+### Java Development Kit (JDK):
+As of **22.09.24**, the version used is **17.0.12**.
+- [Download JDK](https://www.oracle.com/in/java/technologies/downloads/#java17)
+
+---
+
+## Steps to Create and Run Android MAUI Project
+
+1. Open Rider.
+2. Create a new solution using the default Android Maui template.
+3. Run the solution. If everything works fine, congratulations!
+
+---
+
+## Steps to Create and Run the Visual Studio Template MAUI Project
+This Projects master branch is similair to the Visual Studio Template as of 7/10/2024
+
+1. Open Visual Studio on a Windows PC and create the Maui project template.
+2. Create a repository and push it to github
+3. Pull the project on your macbook
+4. Open the solution in Rider and try to run it, if it fails continue with steps 5 through 11
+5. Run this command in your terminal
+```
+sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
+```
+7. Verify that the path is indeed correct by running the following command
+```
+xcode-select -p
+```
+9. Run the following command and accept xcode licenses if you havent already
+```
+sudo xcodebuild -license
+```
+10. Open XCode and download the IOS Simulation Runtime module, this should appear when you try to create a new project and choose the iOS template.
+11. Try to run the project again.
+
+Nuget Package Prerequisites for the Visual Studio Template project is:
+- Microsoft.Maui.Controls
+- Microsoft.Maui.Controls.Compatibility
+- Microsoft.Extensions.Logging.Debug
+- Microsoft.NET.ILLink.Tasks
+
+---
+
+## Troubleshooting
+
+If you encounter an error, follow these steps (replace `YOURUSERNAME` with your own username):
+
+1. Download the **Command Line Tools** for Mac from [Android Studio Command Line Tools](https://developer.android.com/studio/).
+2. Extract the downloaded file to `/YOURUSERNAME/Library/Android/sdk/cmdline-tools`.
+3. Create a folder named `latest`.
+4. Move the files from `cmdline-tools` to the `latest` folder.
+
+### Folder Structure After Extraction
+
+You should now have the following structure:
+
+```
+/YOURUSERNAME/Library/Android/sdk/cmdline-tools/latest
+/YOURUSERNAME/Library/Android/sdk/cmdline-tools/latest/bin
+```
+
+- If the `bin` folder doesn’t exist, create it.
+
+### Accept SDK Licenses
+
+1. Using the terminal, navigate to:
+
+   ```bash
+   cd /YOURUSERNAME/Library/Android/sdk/cmdline-tools/latest/bin
+   ```
+
+2. Run the following command to accept the SDK licenses:
+
+   ```bash
+   yes | ./sdkmanager --licenses
+   ```
+
+3. Install the Android 34 API:
+
+   ```bash
+   ./sdkmanager "platforms;android-34"
+   ```
+
+### Final Step
+You should now be able to build and run your project successfully.
+
+---
+
