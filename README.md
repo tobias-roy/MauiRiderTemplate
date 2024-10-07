@@ -66,7 +66,8 @@ If you encounter an error, follow these steps (replace `YOURUSERNAME` with your 
 1. Download the **Command Line Tools** for Mac from [Android Studio Command Line Tools](https://developer.android.com/studio/).
 2. Extract the downloaded file to `/YOURUSERNAME/Library/Android/sdk/cmdline-tools`.
 3. Create a folder named `latest`.
-4. Move the files from `cmdline-tools` to the `latest` folder.
+   - This should have the path `/YOURUSERNAME/Library/Android/sdk/cmdline-tools/latest`
+5. Move the files from `cmdline-tools` to the `latest` folder.
 
 ### Folder Structure After Extraction
 
