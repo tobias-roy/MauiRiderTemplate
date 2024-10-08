@@ -3,7 +3,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:AppConstants"
-             x:Class="TipCalculator.Calculator">
+             x:Class="TipCalculator.Views.Calculator">
     <ContentPage.Content>
         <Grid RowDefinitions="2*, *, *, *, *, *" ColumnDefinitions="*, *, *, *" RowSpacing="2" ColumnSpacing="2">
             <Frame BackgroundColor="DimGray" Grid.ColumnSpan="4">

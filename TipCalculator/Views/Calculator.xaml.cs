@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TipCalculator;
+namespace TipCalculator.Views;
 
-public partial class GridExample : ContentPage
+public partial class Calculator : ContentPage
 {
-    public GridExample()
+    public Calculator()
     {
         InitializeComponent();
     }

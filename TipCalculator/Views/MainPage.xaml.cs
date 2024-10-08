@@ -1,5 +1,5 @@
 ﻿
-namespace TipCalculator;
+namespace TipCalculator.Views;
 
 public partial class MainPage : ContentPage
 {
