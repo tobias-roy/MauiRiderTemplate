@@ -28,9 +28,9 @@ public partial class MainPage : ContentPage
 
     private void OutputValues()
     {
-        TipPercentageLabel.Text = $"Tip Percentage: {_tipPercentage}%";
-        TipAmountLabel.Text = $"Tip: {_tipAmount:C}";
-        TotalLabel.Text = $"Total: {_total:C}";
+        TipPercentageLabel.Text = $"{_tipPercentage}%";
+        TipAmountLabel.Text = $"{_tipAmount:C}";
+        TotalLabel.Text = $"{_total:C}";
     }
     
     private void CalculateTip(object? sender, EventArgs e)

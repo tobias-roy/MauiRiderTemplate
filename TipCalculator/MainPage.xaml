@@ -16,48 +16,73 @@
     <ContentPage.Behaviors> 
         <toolkit:StatusBarBehavior StatusBarColor="White" StatusBarStyle="DarkContent">
         </toolkit:StatusBarBehavior>
-    </ContentPage.Behaviors>
+    </ContentPage.Behaviors>    
 
     <VerticalStackLayout
             Padding="30,0"
             Spacing="20">
-        <Frame CornerRadius="5" Margin="0" Padding="0" BackgroundColor="#7554D4" WidthRequest="500">
-            <Label Padding="10"
-                   FontSize="30" 
-                   FontAttributes="Bold"
-                   HorizontalTextAlignment="Center" 
-                   VerticalTextAlignment="Center"
-                   TextColor="White"
-                   >Tip Calculator 1</Label>
-                
-        </Frame>
-        <Label Margin="0,10,0,0" FontSize="20" FontAttributes="Bold">Bill Amount:</Label>
-            <Frame CornerRadius="5" Padding="0" Margin="0">
+        <Border Stroke="#7554D4"
+                StrokeThickness="0"
+                StrokeShape="RoundRectangle 0,0,40,40"
+                HorizontalOptions="Center">
+            <Frame Margin="0" Padding="0" BackgroundColor="#7554D4" WidthRequest="410">
+                <Label Padding="10"
+                       FontSize="30" 
+                       FontAttributes="Bold"
+                       HorizontalTextAlignment="Center" 
+                       VerticalTextAlignment="Center"
+                       TextColor="White"
+                >Tip Calculator 1</Label>
+            </Frame>
+        </Border>
+        
+        <HorizontalStackLayout>
+            <Label Margin="0,10,0,0" FontSize="20" FontAttributes="Bold" HorizontalOptions="Start" Text="Bill:" WidthRequest="120"/>
+            <Frame CornerRadius="5" Padding="0" Margin="0" HorizontalOptions="End" WidthRequest="200">
                 <Entry x:Name="BillEntry" Placeholder="Enter bill amount" Keyboard="Numeric" />
             </Frame>
-            <Label x:Name="TipPercentageLabel">Tip Percentage: </Label>
-            <Slider x:Name="TipSlider" Maximum="100" Minimum="0" Value="15" />
-            <Label x:Name="TipAmountLabel">Tip: </Label>
-            <Label x:Name="TotalLabel">Total: </Label>
-            <Button x:Name="LowPercentageBtn" Text="15%">
+        </HorizontalStackLayout>
+    
+        <HorizontalStackLayout  HorizontalOptions="Start">
+            <Label Text="Tip:" WidthRequest="120"/>
+            <Label x:Name="TipAmountLabel" />
+        </HorizontalStackLayout>
+        
+        <HorizontalStackLayout HorizontalOptions="Start">
+            <Label Text="Total:" WidthRequest="120" />
+            <Label x:Name="TotalLabel" />
+        </HorizontalStackLayout>
+        
+        <HorizontalStackLayout HorizontalOptions="Start">
+            <Label Text="Tip Percentage:" WidthRequest="120"/>
+            <Label x:Name="TipPercentageLabel" />
+        </HorizontalStackLayout>
+        
+        <Slider x:Name="TipSlider" Maximum="100" Minimum="0" Value="15" WidthRequest="300"/>
+        
+        <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+            <Button x:Name="LowPercentageBtn" Text="15%" WidthRequest="150">
                 <Button.Shadow>
                     <Shadow Brush="Black" Opacity="0.4" Offset="2,2" Radius="2"/>
                 </Button.Shadow>
             </Button>
-            <Button x:Name="HighPercentageBtn" Text="20%">
+            <Button x:Name="HighPercentageBtn" Text="20%" WidthRequest="150">
             <Button.Shadow>
                 <Shadow Brush="Black" Opacity="0.4" Offset="2,2" Radius="2"/>
             </Button.Shadow>
             </Button>
-            <Button x:Name="RoundDownBtn" Text="Round Down">
+        </HorizontalStackLayout>
+        <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+            <Button x:Name="RoundDownBtn" Text="Round Down" WidthRequest="150">
                 <Button.Shadow>
                     <Shadow Brush="Black" Opacity="0.4" Offset="2,2" Radius="2"/>
                 </Button.Shadow>
             </Button>
-            <Button x:Name="RoundUpBtn" Text="Round Up">
+            <Button x:Name="RoundUpBtn" Text="Round Up" WidthRequest="150">
                 <Button.Shadow>
                     <Shadow Brush="Black" Opacity="0.4" Offset="2,2" Radius="2"/>
                 </Button.Shadow>
             </Button>
-        </VerticalStackLayout>
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
 </ContentPage>
