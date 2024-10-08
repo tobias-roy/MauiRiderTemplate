@@ -3,9 +3,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TipCalculator.Views.GridCellTest">
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="About" Priority="0" Order="Primary" Clicked="NavigateToAboutPage"/>
-    </ContentPage.ToolbarItems>
+    
     <ContentPage.Content>
         <Grid ColumnDefinitions="*" RowDefinitions="*">
             <BoxView BackgroundColor="Aqua" HeightRequest="100" WidthRequest="100"></BoxView>

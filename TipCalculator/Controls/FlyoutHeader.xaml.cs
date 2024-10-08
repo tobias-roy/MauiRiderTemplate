@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TipCalculator.Views;
+namespace TipCalculator.Controls;
 
-public partial class GridCellTest : ContentPage
+public partial class FlyoutHeader : ContentView
 {
-    public GridCellTest()
+    public FlyoutHeader()
     {
         InitializeComponent();
     }

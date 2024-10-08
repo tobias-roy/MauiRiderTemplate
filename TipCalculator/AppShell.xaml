@@ -5,22 +5,23 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:TipCalculator"
     xmlns:views="clr-namespace:TipCalculator.Views"
-    Shell.FlyoutBehavior="Disabled"
+    xmlns:controls="clr-namespace:TipCalculator.Controls"
+    Shell.TabBarIsVisible="False"
     >
-    <TabBar Shell.TabBarTitleColor="Black"
-            Shell.TabBarBackgroundColor="White"
-            Shell.TabBarUnselectedColor="Grey"
-            Shell.TabBarForegroundColor="Black"
-            >
-            <ShellContent
-                Title="Home"
-                ContentTemplate="{DataTemplate views:MainPage}"
-                Icon="home.png"
-            />
-            <ShellContent
-                Title="Calculators" 
-                ContentTemplate="{DataTemplate views:Calculator}"
-                Icon="calculator_svg.png"
-                />
-    </TabBar>
+    <Shell.FlyoutHeader>
+        <controls:FlyoutHeader />
+    </Shell.FlyoutHeader>
+    
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
+        <ShellContent ContentTemplate="{DataTemplate views:Calculator}" Title="Calculator"
+                      Icon="calculator.png"/>
+        <ShellContent ContentTemplate="{DataTemplate views:GridExample}" Title="Grid Example"
+                      Icon="calculator.png"/>
+        <ShellContent ContentTemplate="{DataTemplate views:GridCellTest}" Title="Grid cell test"
+                      Icon="calculator.png"/>
+        <ShellContent ContentTemplate="{DataTemplate views:GridTipCalculator}" Title="Grid tip calculator"
+                      Icon="calculator.png"/>
+    </FlyoutItem>
+    <ShellContent ContentTemplate="{DataTemplate local:About}" Title="About"
+                  Icon="calculator.png"/>
 </Shell>
