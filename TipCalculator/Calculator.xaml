@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:AppConstants"
+             x:Class="TipCalculator.Calculator">
+    <ContentPage.Content>
+        <Grid RowDefinitions="2*, *, *, *, *, *" ColumnDefinitions="*, *, *, *" RowSpacing="2" ColumnSpacing="2">
+            <Frame BackgroundColor="DimGray" Grid.ColumnSpan="4">
+                <Label HorizontalOptions="End" VerticalOptions="End" FontSize="50"  TextColor="{x:Static local:StylingConstants.WhiteTextColor}" Text="0"/>
+            </Frame>
+            <Button TextColor="{x:Static local:StylingConstants.DarkGreyTextColor}" FontSize="{x:Static local:StylingConstants.BtnFontSize}" Grid.Row="1" Grid.Column="0" Text="C" BackgroundColor="{x:Static local:StylingConstants.GreyBtnColor}"/>
+            <Button TextColor="{x:Static local:StylingConstants.DarkGreyTextColor}" FontSize="{x:Static local:StylingConstants.BtnFontSize}" Grid.Row="1" Grid.Column="1" Text="+/-" BackgroundColor="{x:Static local:StylingConstants.GreyBtnColor}"/>
+            <Button TextColor="{x:Static local:StylingConstants.DarkGreyTextColor}" FontSize="{x:Static local:StylingConstants.BtnFontSize}" Grid.Row="1" Grid.Column="2" Text="%" BackgroundColor="{x:Static local:StylingConstants.GreyBtnColor}"/>
+            <Button TextColor="{x:Static local:StylingConstants.WhiteTextColor}" FontSize="{x:Static local:StylingConstants.BtnFontSize}" Grid.Row="1" Grid.Column="3" Text="div" BackgroundColor="{x:Static local:StylingConstants.OrangeBtnColor}"/>
+            <Button TextColor="{x:Static local:StylingConstants.DarkGreyTextColor}" FontSize="{x:Static local:StylingConstants.BtnFontSize}" Grid.Row="2" Grid.Column="0" Text="7" BackgroundColor="{x:Static local:StylingConstants.GreyBtnColor}"/>
+            <Button TextColor="{x:Static local:StylingConstants.DarkGreyTextColor}" FontSize="{x:Static local:StylingConstants.BtnFontSize}" Grid.Row="2" Grid.Column="1" Text="8" BackgroundColor="{x:Static local:StylingConstants.GreyBtnColor}"/>
+            <Button TextColor="{x:Static local:StylingConstants.DarkGreyTextColor}" FontSize="{x:Static local:StylingConstants.BtnFontSize}" Grid.Row="2" Grid.Column="2" Text="9" BackgroundColor="{x:Static local:StylingConstants.GreyBtnColor}"/>
+            <Button TextColor="{x:Static local:StylingConstants.WhiteTextColor}" FontSize="{x:Static local:StylingConstants.BtnFontSize}" Grid.Row="2" Grid.Column="3" Text="X" BackgroundColor="{x:Static local:StylingConstants.OrangeBtnColor}"/>
+            <Button TextColor="{x:Static local:StylingConstants.DarkGreyTextColor}" FontSize="{x:Static local:StylingConstants.BtnFontSize}" Grid.Row="3" Grid.Column="0" Text="4" BackgroundColor="{x:Static local:StylingConstants.GreyBtnColor}"/>
+            <Button TextColor="{x:Static local:StylingConstants.DarkGreyTextColor}" FontSize="{x:Static local:StylingConstants.BtnFontSize}" Grid.Row="3" Grid.Column="1" Text="5" BackgroundColor="{x:Static local:StylingConstants.GreyBtnColor}"/>
+            <Button TextColor="{x:Static local:StylingConstants.DarkGreyTextColor}" FontSize="{x:Static local:StylingConstants.BtnFontSize}" Grid.Row="3" Grid.Column="2" Text="6" BackgroundColor="{x:Static local:StylingConstants.GreyBtnColor}"/>
+            <Button TextColor="{x:Static local:StylingConstants.WhiteTextColor}" FontSize="{x:Static local:StylingConstants.BtnFontSize}" Grid.Row="3" Grid.Column="3" Text="-" BackgroundColor="{x:Static local:StylingConstants.OrangeBtnColor}"/>
+            <Button TextColor="{x:Static local:StylingConstants.DarkGreyTextColor}" FontSize="{x:Static local:StylingConstants.BtnFontSize}" Grid.Row="4" Grid.Column="0" Text="1" BackgroundColor="{x:Static local:StylingConstants.GreyBtnColor}"/>
+            <Button TextColor="{x:Static local:StylingConstants.DarkGreyTextColor}" FontSize="{x:Static local:StylingConstants.BtnFontSize}" Grid.Row="4" Grid.Column="1" Text="2" BackgroundColor="{x:Static local:StylingConstants.GreyBtnColor}"/>
+            <Button TextColor="{x:Static local:StylingConstants.DarkGreyTextColor}" FontSize="{x:Static local:StylingConstants.BtnFontSize}" Grid.Row="4" Grid.Column="2" Text="3" BackgroundColor="{x:Static local:StylingConstants.GreyBtnColor}"/>
+            <Button TextColor="{x:Static local:StylingConstants.WhiteTextColor}" FontSize="{x:Static local:StylingConstants.BtnFontSize}" Grid.Row="4" Grid.Column="3" Text="+" BackgroundColor="{x:Static local:StylingConstants.OrangeBtnColor}"/>
+            <Button TextColor="{x:Static local:StylingConstants.DarkGreyTextColor}" FontSize="{x:Static local:StylingConstants.BtnFontSize}" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Text="0" BackgroundColor="{x:Static local:StylingConstants.GreyBtnColor}"/>
+            <Button TextColor="{x:Static local:StylingConstants.DarkGreyTextColor}" FontSize="{x:Static local:StylingConstants.BtnFontSize}" Grid.Row="5" Grid.Column="2" Text="." BackgroundColor="{x:Static local:StylingConstants.GreyBtnColor}"/>
+            <Button TextColor="{x:Static local:StylingConstants.WhiteTextColor}" FontSize="{x:Static local:StylingConstants.BtnFontSize}" Grid.Row="5" Grid.Column="3" Text="=" BackgroundColor="{x:Static local:StylingConstants.OrangeBtnColor}"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

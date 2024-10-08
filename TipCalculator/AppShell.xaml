@@ -11,7 +11,7 @@
    
 
     <ShellContent
-        ContentTemplate="{DataTemplate local:GridTipCalculator}"
+        ContentTemplate="{DataTemplate local:Calculator}"
         Route="MainPage" />
 
 </Shell>
