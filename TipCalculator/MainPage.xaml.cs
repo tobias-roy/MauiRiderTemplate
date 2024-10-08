@@ -7,7 +7,7 @@ public partial class MainPage : ContentPage
     private double _tipPercentage;
     private double _tipAmount;
     private double _total;
-    private bool _sliderChangedProgrammatically = false;
+    private bool _roundedButtonClicked = false;
     
     public MainPage()
     {
@@ -35,9 +35,9 @@ public partial class MainPage : ContentPage
     
     private void CalculateTip(object? sender, EventArgs e)
     {
-        if(_sliderChangedProgrammatically)
+        if(_roundedButtonClicked)
         {
-            _sliderChangedProgrammatically = false;
+            _roundedButtonClicked = false;
             return;
         }
         GetAndConvertBill();
@@ -64,7 +64,7 @@ public partial class MainPage : ContentPage
         GetAndConvertBill();
         _tipAmount = Math.Round(_bill * TipSlider.Value / 100, MidpointRounding.AwayFromZero);
         _tipAmount = _tipAmount % 10 == 0 ? _tipAmount : Math.Floor(_tipAmount / 10) * 10;
-        _sliderChangedProgrammatically = true;
+        _roundedButtonClicked = true;
         TipSlider.Value = Math.Round(_tipAmount / _bill * 100);
         OutputValues();
     }
@@ -74,7 +74,7 @@ public partial class MainPage : ContentPage
         GetAndConvertBill();
         _tipAmount = Math.Round(_bill * TipSlider.Value / 100, MidpointRounding.AwayFromZero);
         _tipAmount = _tipAmount % 10 == 0 ? _tipAmount : Math.Ceiling(_tipAmount / 10) * 10;
-        _sliderChangedProgrammatically = true;
+        _roundedButtonClicked = true;
         TipSlider.Value = Math.Round(_tipAmount / _bill * 100);
         OutputValues();
     }

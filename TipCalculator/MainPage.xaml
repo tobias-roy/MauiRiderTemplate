@@ -4,7 +4,8 @@
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="TipCalculator.MainPage"
              Shell.BackgroundColor="#FFFFFF"
-             >
+             Shell.NavBarIsVisible="False">
+    
     <Shell.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="0.5,1">
             <GradientStop Color="#FFFFFF" Offset="0.4" />
@@ -20,7 +21,17 @@
     <VerticalStackLayout
             Padding="30,0"
             Spacing="20">
-            <Label Margin="0,10,0,0" FontSize="20" FontAttributes="Bold">Bill Amount:</Label>
+        <Frame CornerRadius="5" Margin="0" Padding="0" BackgroundColor="#7554D4" WidthRequest="500">
+            <Label Padding="10"
+                   FontSize="30" 
+                   FontAttributes="Bold"
+                   HorizontalTextAlignment="Center" 
+                   VerticalTextAlignment="Center"
+                   TextColor="White"
+                   >Tip Calculator 1</Label>
+                
+        </Frame>
+        <Label Margin="0,10,0,0" FontSize="20" FontAttributes="Bold">Bill Amount:</Label>
             <Frame CornerRadius="5" Padding="0" Margin="0">
                 <Entry x:Name="BillEntry" Placeholder="Enter bill amount" Keyboard="Numeric" />
             </Frame>
