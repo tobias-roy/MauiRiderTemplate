@@ -52,18 +52,18 @@
             
                 <HorizontalStackLayout Grid.Row="1">
                     <Label Text="Tip:" WidthRequest="120"/>
-                    <Label x:Name="TipAmountLabel" />
+                    <Label x:Name="TipAmountLabel" Text="0.00"/>
                 </HorizontalStackLayout>
                 
                 <HorizontalStackLayout Grid.Row="2">
                     <Label Text="Total:" WidthRequest="120" />
-                    <Label x:Name="TotalLabel" />
+                    <Label x:Name="TotalLabel" Text="0.00"/>
                 </HorizontalStackLayout>
             </Grid>
         <Grid Grid.Row="2" Grid.ColumnSpan="2" Grid.RowDefinitions="50, 50, 50, 50" Grid.ColumnDefinitions="*, *" VerticalOptions="End">
             <Grid Grid.Row="0" Grid.ColumnSpan="2" Grid.RowDefinitions="*" Grid.ColumnDefinitions="*, *" HorizontalOptions="Center" ColumnSpacing="120" VerticalOptions="End">
                     <Label Text="Tip Percentage:" Grid.Row="0" Grid.Column="0"/>
-                    <Label x:Name="TipPercentageLabel" Grid.Row="0" Grid.Column="1"/>
+                    <Label x:Name="TipPercentageLabel" Grid.Row="0" Grid.Column="1" Text="15%"/>
             </Grid>
             <Grid Grid.Row="1" HorizontalOptions="Center" Grid.ColumnSpan="2">
                 <Slider x:Name="TipSlider" Maximum="100" Minimum="0" Value="15" WidthRequest="300" Grid.Row="1"/>
