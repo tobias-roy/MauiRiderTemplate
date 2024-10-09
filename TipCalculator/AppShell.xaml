@@ -24,4 +24,6 @@
     </FlyoutItem>
     <ShellContent ContentTemplate="{DataTemplate local:About}" Title="About"
                   Icon="calculator.png"/>
+    <ShellContent ContentTemplate="{DataTemplate local:FeedBackPage}" Title="Feedback"
+                  Icon="calculator.png"/>
 </Shell>

@@ -60,13 +60,14 @@
                     <Label x:Name="TotalLabel" Text="0.00"/>
                 </HorizontalStackLayout>
             </Grid>
-        <Grid Grid.Row="2" Grid.ColumnSpan="2" Grid.RowDefinitions="50, 50, 50, 50" Grid.ColumnDefinitions="*, *" VerticalOptions="End">
+        <Grid Grid.Row="2" Grid.ColumnSpan="2" Grid.RowDefinitions="50, 50, 50, 50, 50" Grid.ColumnDefinitions="*, *" VerticalOptions="End">
             <Grid Grid.Row="0" Grid.ColumnSpan="2" Grid.RowDefinitions="*" Grid.ColumnDefinitions="*, *" HorizontalOptions="Center" ColumnSpacing="120" VerticalOptions="End">
                     <Label Text="Tip Percentage:" Grid.Row="0" Grid.Column="0"/>
                     <Label x:Name="TipPercentageLabel" Grid.Row="0" Grid.Column="1" Text="15%"/>
             </Grid>
             <Grid Grid.Row="1" HorizontalOptions="Center" Grid.ColumnSpan="2">
-                <Slider x:Name="TipSlider" Maximum="100" Minimum="0" Value="15" WidthRequest="300" Grid.Row="1"/>
+                <Slider x:Name="TipSlider" Maximum="100" Minimum="0" Value="15" WidthRequest="300" Grid.Row="1">
+                </Slider>
             </Grid>
             
             <Grid HorizontalOptions="Center" Grid.Row="2" Grid.ColumnSpan="2" Grid.ColumnDefinitions="*, *" Grid.RowDefinitions="*" Padding="10" ColumnSpacing="10" HeightRequest="60">
@@ -88,6 +89,13 @@
                     </Button.Shadow>
                 </Button>
                 <Button x:Name="RoundUpBtn" Text="Round Up" WidthRequest="150" Grid.Row="1" Grid.Column="1">
+                    <Button.Shadow>
+                        <Shadow Brush="Black" Opacity="0.4" Offset="2,2" Radius="2"/>
+                    </Button.Shadow>
+                </Button>
+            </Grid>
+            <Grid HorizontalOptions="Center" Grid.Row="4" Grid.ColumnSpan="2" Grid.ColumnDefinitions="*, *" Grid.RowDefinitions="*" Padding="10" ColumnSpacing="10" HeightRequest="60">
+                <Button x:Name="CurrencyBtn" Text="Currency" WidthRequest="150">
                     <Button.Shadow>
                         <Shadow Brush="Black" Opacity="0.4" Offset="2,2" Radius="2"/>
                     </Button.Shadow>
