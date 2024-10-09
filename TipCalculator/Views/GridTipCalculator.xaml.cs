@@ -23,6 +23,7 @@ public partial class GridTipCalculator : ContentPage
         RoundDownBtn.Clicked += OnRoundDownBtnClicked;
         RoundUpBtn.Clicked += OnRoundUpBtnClicked;
         CurrencyBtn.Clicked += ChangeCultureInfo;
+        SelectCurrencyBtn.Clicked += SelectChangeCultureInfo;
     }
 
     private async void GetAndConvertBill()
@@ -65,21 +66,15 @@ public partial class GridTipCalculator : ContentPage
         switch (_cultureCounter)
         {
             case 0:
-                CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("de-DE");
-                CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("de-DE");
-                OutputValues();
+                ChangeCulture("de-DE");
                 _cultureCounter++;
                 break;
             case 1:
-                CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("en-US");
-                CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("en-US");
-                OutputValues();
+                ChangeCulture("en-US");
                 _cultureCounter++;
                 break;
             case 2:
-                CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("da-DK");
-                CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("da-DK");
-                OutputValues();
+                ChangeCulture("da-DK");
                 _cultureCounter = 0;
                 break;
             default:
@@ -87,7 +82,34 @@ public partial class GridTipCalculator : ContentPage
                 OutputValues();
                 break;
         }   
-        
+    }
+    private async void SelectChangeCultureInfo(object? sender, EventArgs e)
+    {
+        string action = await DisplayActionSheet("Select currency", "Cancel", null, "Danish Krone", "Euro", "US Dollar");
+        switch (action)
+        {
+            case "Euro":
+                ChangeCulture("de-DE");
+                _cultureCounter++;
+                break;
+            case "US Dollar":
+                ChangeCulture("en-US");
+                _cultureCounter++;
+                break;
+            case "Danish Krone":
+                ChangeCulture("da-DK");
+                _cultureCounter = 0;
+                break;
+            case "Cancel":
+                break;
+        }   
+    }
+    
+    private void ChangeCulture(string culture)
+    {
+        CultureInfo.DefaultThreadCurrentCulture = new CultureInfo(culture);
+        CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo(culture);
+        OutputValues();
     }
 
     private async void OnLowPercentageBtnClicked(object? sender, EventArgs e)
