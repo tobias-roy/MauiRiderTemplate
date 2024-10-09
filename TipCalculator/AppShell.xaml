@@ -13,6 +13,8 @@
     </Shell.FlyoutHeader>
     
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
+        <ShellContent ContentTemplate="{DataTemplate views:RotatingText}" Title="Rotating Text"
+                      Icon="calculator.png"/>
         <ShellContent ContentTemplate="{DataTemplate views:Calculator}" Title="Calculator"
                       Icon="calculator.png"/>
         <ShellContent ContentTemplate="{DataTemplate views:GridExample}" Title="Grid Example"

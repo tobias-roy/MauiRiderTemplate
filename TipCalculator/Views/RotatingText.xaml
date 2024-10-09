@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TipCalculator.Views.RotatingText">
+    <ContentPage.Content>
+        <Grid RowDefinitions="100, 100, 100, *" ColumnDefinitions="*" Padding="30, 0">
+            <Slider Grid.Row="0" x:Name="DegreeSlider" Minimum="0" Maximum="90" Value="0" WidthRequest="200" />
+            <Label Grid.Row="1" x:Name="LongDegreeText" HorizontalOptions="Center"
+                   BindingContext="{x:Reference DegreeSlider}"
+                   Text="{Binding Value, StringFormat='The slider value is {0:F1}°'}"/>
+            <Label HorizontalOptions="Center" Grid.Row="2" x:Name="ShortDegreeText" 
+                   BindingContext="{x:Reference DegreeSlider}"
+                   Text="{Binding Value, StringFormat='{0:N0}'}"/>
+            <Frame Grid.Row="3" BackgroundColor="#7554D4">
+                <Label VerticalOptions="Center" HorizontalOptions="Center" x:Name="RotatingTextDegree"
+                       BindingContext="{x:Reference DegreeSlider}"
+                       Rotation="{Binding Value}"
+                       Text="{Binding Value, StringFormat='Rotation Angle = {0:N0}°'}"/>
+            </Frame>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
