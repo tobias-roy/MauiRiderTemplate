@@ -2,9 +2,11 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:models="clr-namespace:TipCalculator.Models"
              x:Class="TipCalculator.Views.GridTipCalculator"
              Shell.BackgroundColor="#FFFFFF"
-             Shell.NavBarIsVisible="False">
+             Shell.NavBarIsVisible="False"
+             x:DataType="models:Tip">
     
     <Shell.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="0.5,1">
@@ -46,30 +48,33 @@
                 <HorizontalStackLayout Grid.Row="0">
                     <Label Margin="0,10,0,0" FontSize="20" FontAttributes="Bold" HorizontalOptions="Start" Text="Bill:" WidthRequest="120"/>
                     <Frame CornerRadius="5" Padding="0" Margin="0" HorizontalOptions="End" WidthRequest="200">
-                        <Entry x:Name="BillEntry" Placeholder="Enter bill amount" Keyboard="Numeric" />
+                        <Entry x:Name="BillEntry" Placeholder="Enter bill amount" Keyboard="Numeric" 
+                               Text="{Binding BillAmount}"/>
                     </Frame>
                 </HorizontalStackLayout>
             
                 <HorizontalStackLayout Grid.Row="1">
                     <Label Text="Tip:" WidthRequest="120"/>
-                    <Label x:Name="TipAmountLabel" Text="0.00"/>
+                    <Label x:Name="TipAmountLabel" Text="{Binding TipAmount, StringFormat='{0}'}"/>
                 </HorizontalStackLayout>
                 
                 <HorizontalStackLayout Grid.Row="2">
                     <Label Text="Total:" WidthRequest="120" />
-                    <Label x:Name="TotalLabel" Text="0.00"/>
+                    <Label x:Name="TotalLabel" Text="{Binding TotalAmount, StringFormat='{0}'}"/>
                 </HorizontalStackLayout>
             </Grid>
         <Grid Grid.Row="2" Grid.ColumnSpan="2" Grid.RowDefinitions="50, 50, 50, 50, 50" Grid.ColumnDefinitions="*, *" VerticalOptions="End">
             <Grid Grid.Row="0" Grid.ColumnSpan="2" Grid.RowDefinitions="*" Grid.ColumnDefinitions="*, *" HorizontalOptions="Center" ColumnSpacing="120" VerticalOptions="End">
                     <Label Text="Tip Percentage:" Grid.Row="0" Grid.Column="0"/>
-                    <Label x:Name="TipPercentageLabel" Grid.Row="0" Grid.Column="1" Text="15%"/>
+                    <Label x:Name="TipPercentageLabel" Grid.Row="0" Grid.Column="1"
+                           Text="{Binding TipPct, StringFormat='{0:N1}%'}"/>
             </Grid>
             <Grid Grid.Row="1" HorizontalOptions="Center" Grid.ColumnSpan="2">
-                <Slider x:Name="TipSlider" Maximum="100" Minimum="0" Value="15" WidthRequest="300" Grid.Row="1">
-                </Slider>
+                <Slider x:Name="TipSlider" Maximum="100" Minimum="0" Value="{Binding TipPct}" WidthRequest="300" />
             </Grid>
             
+            
+            <!-- Buttons Below this -->
             <Grid HorizontalOptions="Center" Grid.Row="2" Grid.ColumnSpan="2" Grid.ColumnDefinitions="*, *" Grid.RowDefinitions="*" Padding="10" ColumnSpacing="10" HeightRequest="60">
                 <Button x:Name="LowPercentageBtn" Text="15%" WidthRequest="150">
                     <Button.Shadow>

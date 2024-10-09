@@ -1,23 +1,31 @@
 ﻿
 using System.Globalization;
+using System.Text.RegularExpressions;
+using TipCalculator.Models;
 
 namespace TipCalculator.Views;
 
 public partial class GridTipCalculator : ContentPage
 {
-    private double _bill;
-    private double _tipPercentage;
-    private double _tipAmount;
-    private double _total;
     private bool _roundedButtonClicked = false;
     private int _cultureCounter = 0;
+    private Tip _tip;
     
     public GridTipCalculator()
     {
         InitializeComponent();
         
-        TipSlider.ValueChanged += CalculateTip;
-        BillEntry.TextChanged += CalculateTip;
+        _tip = new Tip
+        {
+            BillAmount = "",
+            TipAmount = "0.00",
+            TotalAmount = "0.00",
+            TipPct = 15
+        };
+        BindingContext = _tip;
+        
+        BillEntry.TextChanged += CheckUserBillInput;
+        TipSlider.ValueChanged += (sender, e) => _tip.CalculateTip();
         LowPercentageBtn.Clicked += OnLowPercentageBtnClicked;
         HighPercentageBtn.Clicked += OnHighPercentageBtnClicked;
         RoundDownBtn.Clicked += OnRoundDownBtnClicked;
@@ -26,41 +34,15 @@ public partial class GridTipCalculator : ContentPage
         SelectCurrencyBtn.Clicked += SelectChangeCultureInfo;
     }
 
-    private async void GetAndConvertBill()
+    private async void CheckUserBillInput(object? sender, EventArgs e)
     {
-        if (!System.Text.RegularExpressions.Regex.IsMatch(BillEntry.Text, "^[0-9]*$"))
+        if (!Regex.IsMatch(BillEntry.Text, "^[0-9]*$"))
         {
             BillEntry.Text = BillEntry.Text.Remove(BillEntry.Text.Length - 1, 1);
             await DisplayAlert("Error", "Only numbers are allowed", "OK");
-            return;
         }
-        _bill = BillEntry.Text == string.Empty ? 0 : Convert.ToDouble(BillEntry.Text);
+        _tip.CalculateTip();
     }
-
-    private void OutputValues()
-    {
-        TipPercentageLabel.Text = $"{_tipPercentage}%";
-        TipAmountLabel.Text = $"{_tipAmount:C}";
-        TotalLabel.Text = $"{_total:C}";
-    }
-    
-    private void CalculateTip(object? sender, EventArgs e)
-    {
-        if(_roundedButtonClicked)
-        {
-            _roundedButtonClicked = false;
-            return;
-        }
-        GetAndConvertBill();
-        if(BillEntry.Text != string.Empty)
-        {
-            _tipPercentage = Math.Round(TipSlider.Value);
-            _tipAmount = Math.Round(_bill * TipSlider.Value / 100);
-            _total = Math.Round(_bill + (_bill * TipSlider.Value / 100));
-            OutputValues();
-        }
-    }
-
     private void ChangeCultureInfo(object? sender, EventArgs e)
     {
         switch (_cultureCounter)
@@ -79,7 +61,6 @@ public partial class GridTipCalculator : ContentPage
                 break;
             default:
                 _cultureCounter = 0;
-                OutputValues();
                 break;
         }   
     }
@@ -103,49 +84,36 @@ public partial class GridTipCalculator : ContentPage
             case "Cancel":
                 break;
         }   
+        _tip.CalculateTip();
     }
-    
     private void ChangeCulture(string culture)
     {
         CultureInfo.DefaultThreadCurrentCulture = new CultureInfo(culture);
         CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo(culture);
-        OutputValues();
+        _tip.CalculateTip();
     }
-
     private async void OnLowPercentageBtnClicked(object? sender, EventArgs e)
     {
         TipSlider.Value = 15;
-        CalculateTip(sender, e);
+        _tip.CalculateTip();        
         await DisplayAlert("Fixed tip", "You have chosen a fixed tip of 15%", "OK");
     }
-    
     private async void OnHighPercentageBtnClicked(object? sender, EventArgs e)
     {
         bool answer = await DisplayAlert("Fixed tip", "You have chosen a fixed tip of 20% are you sure you want to apply this?", "Yes", "No");
         if (answer)
         {
             TipSlider.Value = 20;
-            CalculateTip(sender, e);
+            _tip.CalculateTip();        
         }
     }
-    
     private void OnRoundDownBtnClicked(object? sender, EventArgs e)
     {
-        GetAndConvertBill();
-        _tipAmount = Math.Round(_bill * TipSlider.Value / 100, MidpointRounding.AwayFromZero);
-        _tipAmount = _tipAmount % 10 == 0 ? _tipAmount : Math.Floor(_tipAmount / 10) * 10;
-        _roundedButtonClicked = true;
-        TipSlider.Value = Math.Round(_tipAmount / _bill * 100);
-        OutputValues();
+        _tip.CalculateRoundedTip(0);
     }
-    
     private void OnRoundUpBtnClicked(object? sender, EventArgs e)
     {
-        GetAndConvertBill();
-        _tipAmount = Math.Round(_bill * TipSlider.Value / 100, MidpointRounding.AwayFromZero);
-        _tipAmount = _tipAmount % 10 == 0 ? _tipAmount : Math.Ceiling(_tipAmount / 10) * 10;
-        _roundedButtonClicked = true;
-        TipSlider.Value = Math.Round(_tipAmount / _bill * 100);
-        OutputValues();
+        _tip.CalculateRoundedTip(1);
+
     }
 }
