@@ -32,5 +32,7 @@
 	<array>
 		<string>fetch</string>
 	</array>
+	<key>UIUSerInterfaceStyle</key>
+	<string>Light</string>
 </dict>
 </plist>

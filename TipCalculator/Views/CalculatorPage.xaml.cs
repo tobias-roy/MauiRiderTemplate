@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace TipCalculator.Views;
 
-public partial class About : ContentPage
+public partial class CalculatorPage : ContentPage
 {
-    public About()
+    public CalculatorPage()
     {
         InitializeComponent();
     }

@@ -16,21 +16,25 @@
         <ShellContent ContentTemplate="{DataTemplate views:RestaurantsPage}" Title="Restaurants"
                       Icon="restaurant_icon.png"/>
         <ShellContent ContentTemplate="{DataTemplate views:GridTipCalculator}" Title="Grid tip calculator"
-                      Icon="calculator.png"/>
+                      />
         <ShellContent ContentTemplate="{DataTemplate views:RotatingText}" Title="Rotating Text"
                       Icon="rotation_icon.png"/>
         <ShellContent ContentTemplate="{DataTemplate views:ColorGridExample}" Title="Grids Example"
                       Icon="grid_icon.png"/>
-        <ShellContent ContentTemplate="{DataTemplate views:Calculator}" Title="Calculator"
+        <ShellContent ContentTemplate="{DataTemplate views:CalculatorPage}" Title="Calculator"
                       Icon="calculator_color.png"/>
-        <ShellContent ContentTemplate="{DataTemplate views:GridCellTest}" Title="Grid cell test"
+        <ShellContent ContentTemplate="{DataTemplate views:GridCellTestPage}" Title="Grid cell test"
                       Icon="grid_cell.png"/>
         
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
-        <ShellContent ContentTemplate="{DataTemplate views:About}" Title="About"
+        <ShellContent ContentTemplate="{DataTemplate views:AboutPage}" Title="About"
                       Icon="about.png"/>
         <ShellContent ContentTemplate="{DataTemplate views:FeedBackPage}" Title="Feedback"
                       Icon="feedback.png"/>
     </FlyoutItem>
+        <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
+            <ShellContent ContentTemplate="{DataTemplate views:SettingsPage}" Title="Settings"
+                          />
+        </FlyoutItem>
 
 </Shell>

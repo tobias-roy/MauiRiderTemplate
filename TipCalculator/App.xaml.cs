@@ -8,6 +8,8 @@ public partial class App : Application
     {
         InitializeComponent();
         
+        // Application.Current.UserAppTheme = AppTheme.Light;
+        
         CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("da-DK");
         CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("da-DK");
 

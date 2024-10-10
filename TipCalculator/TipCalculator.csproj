@@ -65,7 +65,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <MauiXaml Update="Views\Calculator.xaml">
+      <MauiXaml Update="Views\CalculatorPage.xaml">
         <SubType>Designer</SubType>
       </MauiXaml>
       <MauiXaml Update="Views\ColorGridExample.xaml">
@@ -74,7 +74,7 @@
       <MauiXaml Update="Views\GridTipCalculator.xaml">
         <SubType>Designer</SubType>
       </MauiXaml>
-      <MauiXaml Update="Views\GridCellTest.xaml">
+      <MauiXaml Update="Views\GridCellTestPage.xaml">
         <SubType>Designer</SubType>
       </MauiXaml>
       <MauiXaml Update="Views\MainPage.xaml">
@@ -86,13 +86,13 @@
       <MauiXaml Update="Views\FeedbackPage.xaml">
         <SubType>Designer</SubType>
       </MauiXaml>
-      <MauiXaml Update="Views\About.xaml">
+      <MauiXaml Update="Views\AboutPage.xaml">
         <SubType>Designer</SubType>
       </MauiXaml>
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Update="Views\Calculator.xaml.cs">
+      <Compile Update="Views\CalculatorPage.xaml.cs">
         <DependentUpon>Calculator.xaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
@@ -104,7 +104,7 @@
         <DependentUpon>GridTipCalculator.xaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
-      <Compile Update="Views\GridCellTest.xaml.cs">
+      <Compile Update="Views\GridCellTestPage.xaml.cs">
         <DependentUpon>GridCellTest.xaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
@@ -120,7 +120,7 @@
         <DependentUpon>FeedBackPage.xaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
-      <Compile Update="Views\About.xaml.cs">
+      <Compile Update="Views\AboutPage.xaml.cs">
         <DependentUpon>About.xaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace TipCalculator.Views;
 
-public partial class GridCellTest : ContentPage
+public partial class AboutPage : ContentPage
 {
-    public GridCellTest()
+    public AboutPage()
     {
         InitializeComponent();
     }

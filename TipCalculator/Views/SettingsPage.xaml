@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TipCalculator.Views.SettingsPage"
+             >
+    <ContentPage.Content>
+        <TableView Intent="Settings" BackgroundColor="Transparent">
+            <TableRoot>
+                <TableSection>
+                    <ViewCell >
+                        <ViewCell.View>
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="Fill">
+                                <Label WidthRequest="320" Padding="10, 0" VerticalTextAlignment="Center" TextColor="{AppThemeBinding Light=Black, Dark=White}" Text="Toggle Darkmode"/>
+                                <Switch Toggled="OnToggled" x:Name="DarkSwitch" HorizontalOptions="End" VerticalOptions="Center" IsToggled="False" OnColor="Green"/>
+                            </StackLayout>
+                        </ViewCell.View>
+                    </ViewCell>
+                </TableSection>
+            </TableRoot>
+        </TableView>
+    </ContentPage.Content>
+</ContentPage>
