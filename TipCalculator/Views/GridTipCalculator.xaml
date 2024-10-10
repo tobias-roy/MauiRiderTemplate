@@ -5,8 +5,8 @@
              xmlns:models="clr-namespace:TipCalculator.Models"
              x:Class="TipCalculator.Views.GridTipCalculator"
              Shell.BackgroundColor="#FFFFFF"
-             Shell.NavBarIsVisible="False"
-             x:DataType="models:Tip">
+             x:DataType="models:Tip"
+             HideSoftInputOnTapped="True">
     
     <Shell.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="0.5,1">
@@ -48,8 +48,8 @@
                 <HorizontalStackLayout Grid.Row="0">
                     <Label Margin="0,10,0,0" FontSize="20" FontAttributes="Bold" HorizontalOptions="Start" Text="Bill:" WidthRequest="120"/>
                     <Frame CornerRadius="5" Padding="0" Margin="0" HorizontalOptions="End" WidthRequest="200">
-                        <Entry x:Name="BillEntry" Placeholder="Enter bill amount" Keyboard="Numeric" 
-                               Text="{Binding BillAmount}"/>
+                        <Entry x:Name="BillEntry" Placeholder="Enter bill amount" Keyboard="Numeric" ReturnType="Done" 
+                                Text="{Binding BillAmount}"/>
                     </Frame>
                 </HorizontalStackLayout>
             

@@ -8,26 +8,29 @@
     xmlns:controls="clr-namespace:TipCalculator.Controls"
     Shell.TabBarIsVisible="False"
     >
+    
     <Shell.FlyoutHeader>
         <controls:FlyoutHeader />
     </Shell.FlyoutHeader>
     
-    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
-        <ShellContent ContentTemplate="{DataTemplate views:Restaurants}" Title="Restaurants"
-                      Icon="calculator.png"/>
+        <ShellContent ContentTemplate="{DataTemplate views:RestaurantsPage}" Title="Restaurants"
+                      Icon="restaurant_icon.png"/>
         <ShellContent ContentTemplate="{DataTemplate views:GridTipCalculator}" Title="Grid tip calculator"
                       Icon="calculator.png"/>
         <ShellContent ContentTemplate="{DataTemplate views:RotatingText}" Title="Rotating Text"
-                      Icon="calculator.png"/>
+                      Icon="rotation_icon.png"/>
+        <ShellContent ContentTemplate="{DataTemplate views:ColorGridExample}" Title="Grids Example"
+                      Icon="grid_icon.png"/>
         <ShellContent ContentTemplate="{DataTemplate views:Calculator}" Title="Calculator"
-                      Icon="calculator.png"/>
-        <ShellContent ContentTemplate="{DataTemplate views:GridExample}" Title="Grid Example"
-                      Icon="calculator.png"/>
+                      Icon="calculator_color.png"/>
         <ShellContent ContentTemplate="{DataTemplate views:GridCellTest}" Title="Grid cell test"
-                      Icon="calculator.png"/>
+                      Icon="grid_cell.png"/>
+        
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
+        <ShellContent ContentTemplate="{DataTemplate views:About}" Title="About"
+                      Icon="about.png"/>
+        <ShellContent ContentTemplate="{DataTemplate views:FeedBackPage}" Title="Feedback"
+                      Icon="feedback.png"/>
     </FlyoutItem>
-    <ShellContent ContentTemplate="{DataTemplate views:About}" Title="About"
-                  Icon="calculator.png"/>
-    <ShellContent ContentTemplate="{DataTemplate views:FeedBackPage}" Title="Feedback"
-                  Icon="calculator.png"/>
+
 </Shell>

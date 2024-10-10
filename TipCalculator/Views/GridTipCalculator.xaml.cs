@@ -38,7 +38,11 @@ public partial class GridTipCalculator : ContentPage
     {
         if (!Regex.IsMatch(BillEntry.Text, "^[0-9]*$"))
         {
-            BillEntry.Text = BillEntry.Text.Remove(BillEntry.Text.Length - 1, 1);
+            BillEntry.Text = Regex.Replace(BillEntry.Text, "[^0-9.]", "");
+            if (BillEntry.Text.Length <= 0)
+            {
+                BillEntry.Text = "0";
+            }
             await DisplayAlert("Error", "Only numbers are allowed", "OK");
         }
         _tip.CalculateTip();
@@ -116,4 +120,5 @@ public partial class GridTipCalculator : ContentPage
         _tip.CalculateRoundedTip(1);
 
     }
+    
 }

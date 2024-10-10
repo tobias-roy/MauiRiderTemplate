@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace TipCalculator.Views;
 
-public partial class GridExample : ContentPage
+public partial class ColorGridExample : ContentPage
 {
-    public GridExample()
+    public ColorGridExample()
     {
         InitializeComponent();
     }

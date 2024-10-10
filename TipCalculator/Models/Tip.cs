@@ -50,6 +50,8 @@ public class Tip : INotifyPropertyChanged
     
     public void CalculateTip()
     {
+        if(BillAmount == null) return;
+        if(BillAmount == String.Empty) return;
         TipAmount = (decimal.Parse(BillAmount) * (decimal)TipPct / 100).ToString("C", CultureInfo.DefaultThreadCurrentCulture);
         TotalAmount = (decimal.Parse(BillAmount) + (decimal.Parse(BillAmount) * (decimal)TipPct / 100)).ToString("C", CultureInfo.DefaultThreadCurrentCulture);
     }
