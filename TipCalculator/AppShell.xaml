@@ -13,6 +13,10 @@
     </Shell.FlyoutHeader>
     
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
+        <ShellContent ContentTemplate="{DataTemplate views:Restaurants}" Title="Restaurants"
+                      Icon="calculator.png"/>
+        <ShellContent ContentTemplate="{DataTemplate views:GridTipCalculator}" Title="Grid tip calculator"
+                      Icon="calculator.png"/>
         <ShellContent ContentTemplate="{DataTemplate views:RotatingText}" Title="Rotating Text"
                       Icon="calculator.png"/>
         <ShellContent ContentTemplate="{DataTemplate views:Calculator}" Title="Calculator"
@@ -21,11 +25,9 @@
                       Icon="calculator.png"/>
         <ShellContent ContentTemplate="{DataTemplate views:GridCellTest}" Title="Grid cell test"
                       Icon="calculator.png"/>
-        <ShellContent ContentTemplate="{DataTemplate views:GridTipCalculator}" Title="Grid tip calculator"
-                      Icon="calculator.png"/>
     </FlyoutItem>
-    <ShellContent ContentTemplate="{DataTemplate local:About}" Title="About"
+    <ShellContent ContentTemplate="{DataTemplate views:About}" Title="About"
                   Icon="calculator.png"/>
-    <ShellContent ContentTemplate="{DataTemplate local:FeedBackPage}" Title="Feedback"
+    <ShellContent ContentTemplate="{DataTemplate views:FeedBackPage}" Title="Feedback"
                   Icon="calculator.png"/>
 </Shell>

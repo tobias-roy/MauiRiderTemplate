@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TipCalculator;
+namespace TipCalculator.Views;
 
 [QueryProperty(nameof(Name), "name")]
 public partial class DetailsPage : ContentPage
