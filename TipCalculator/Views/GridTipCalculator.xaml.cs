@@ -20,7 +20,7 @@ public partial class GridTipCalculator : ContentPage
             BillAmount = "",
             TipAmount = "0.00",
             TotalAmount = "0.00",
-            TipPct = 15
+            TipPct = Preferences.Get("TipPercentage", 15)
         };
         BindingContext = _tip;
         
@@ -32,8 +32,14 @@ public partial class GridTipCalculator : ContentPage
         RoundUpBtn.Clicked += OnRoundUpBtnClicked;
         CurrencyBtn.Clicked += ChangeCultureInfo;
         SelectCurrencyBtn.Clicked += SelectChangeCultureInfo;
+        DefaultTipValue.Clicked += OnDefaultTipValueClicked;
     }
-
+    
+    private async void OnDefaultTipValueClicked(object? sender, EventArgs e)
+    {
+        _tip.TipPct = Preferences.Get("TipPercentage", 15);
+    }
+    
     private async void CheckUserBillInput(object? sender, EventArgs e)
     {
         if (!Regex.IsMatch(BillEntry.Text, "^[0-9]*$"))

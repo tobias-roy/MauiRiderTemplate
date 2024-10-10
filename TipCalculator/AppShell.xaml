@@ -16,7 +16,7 @@
         <ShellContent ContentTemplate="{DataTemplate views:RestaurantsPage}" Title="Restaurants"
                       Icon="restaurant_icon.png"/>
         <ShellContent ContentTemplate="{DataTemplate views:GridTipCalculator}" Title="Grid tip calculator"
-                      />
+                      Icon="gridtipcalc.png"/>
         <ShellContent ContentTemplate="{DataTemplate views:RotatingText}" Title="Rotating Text"
                       Icon="rotation_icon.png"/>
         <ShellContent ContentTemplate="{DataTemplate views:ColorGridExample}" Title="Grids Example"
@@ -34,7 +34,7 @@
     </FlyoutItem>
         <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
             <ShellContent ContentTemplate="{DataTemplate views:SettingsPage}" Title="Settings"
-                          />
+                          Icon="settings.png"/>
         </FlyoutItem>
 
 </Shell>
