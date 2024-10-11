@@ -54,6 +54,15 @@
                         </ViewCell.View>
                     </ViewCell>
                 </TableSection>
+                <TableSection>
+                    <ViewCell>
+                        <ViewCell.View >
+                            <StackLayout Orientation="Horizontal" Padding="10, 0">
+                                <Button x:Name="SelectDefaultStartPageBtn" Text="Set default startpage"/>
+                            </StackLayout>
+                        </ViewCell.View>
+                    </ViewCell>
+                </TableSection>
             </TableRoot>
         </TableView>
     </ContentPage.Content>

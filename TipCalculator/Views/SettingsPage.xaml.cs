@@ -26,6 +26,7 @@ public partial class SettingsPage : ContentPage
         _defaultDefaultTipPercentage = Preferences.Get("TipPercentage", 15);
         InitializeComponent();
         BindingContext = this;
+        SelectDefaultStartPageBtn.Clicked += OnSelectDefaultStartPageBtnClicked;
     }
 
     private void OnToggled(object? sender, ToggledEventArgs e)
@@ -38,5 +39,53 @@ public partial class SettingsPage : ContentPage
         {
             Application.Current.UserAppTheme = AppTheme.Light;
         }
+    }
+    
+    public async void OnSelectDefaultStartPageBtnClicked(object sender, EventArgs e)
+    {
+        string action = await DisplayActionSheet("Select default startpage", 
+            "Cancel", 
+            null, 
+        "About", 
+            "Calculator", 
+            "Color Grid", 
+            "Feedback", 
+            "Grid Cell", 
+            "Tip Calculator", 
+            "Restaurants", 
+            "Rotating Text");
+        switch (action)
+        {
+            case "About":
+                Preferences.Set("DefaultStartPage", "/about");
+                break;
+            case "Calculator":
+                Preferences.Set("DefaultStartPage", "/calculator");
+                break;
+            case "Color Grid":
+                Preferences.Set("DefaultStartPage", "/colorgrid");
+                break;
+            case "Feedback":
+                Preferences.Set("DefaultStartPage", "/feedback");
+                break;
+            case "Grid Cell":
+                Preferences.Set("DefaultStartPage", "/gridcell");
+                break;
+            case "Tip Calculator":
+                Preferences.Set("DefaultStartPage", "/tipcalculator");
+                break;
+            case "Restaurants":
+                Preferences.Set("DefaultStartPage", "/restaurants");
+                break;
+            case "Rotating Text":
+                Preferences.Set("DefaultStartPage", "/rotatingtext");
+                break;
+        }
+        if (action == "Cancel")
+        {
+            Preferences.Set("DefaultStartPage", "/tipcalculator");
+            
+        }
+        
     }
 }
