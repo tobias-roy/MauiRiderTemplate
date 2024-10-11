@@ -68,10 +68,10 @@
       <MauiXaml Update="Views\CalculatorPage.xaml">
         <SubType>Designer</SubType>
       </MauiXaml>
-      <MauiXaml Update="Views\ColorGridExample.xaml">
+      <MauiXaml Update="Views\ColorGridExamplePage.xaml">
         <SubType>Designer</SubType>
       </MauiXaml>
-      <MauiXaml Update="Views\GridTipCalculator.xaml">
+      <MauiXaml Update="Views\TipCalculatorPage.xaml">
         <SubType>Designer</SubType>
       </MauiXaml>
       <MauiXaml Update="Views\GridCellTestPage.xaml">
@@ -96,11 +96,11 @@
         <DependentUpon>Calculator.xaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
-      <Compile Update="Views\ColorGridExample.xaml.cs">
+      <Compile Update="Views\ColorGridExamplePage.xaml.cs">
         <DependentUpon>GridExample.xaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
-      <Compile Update="Views\GridTipCalculator.xaml.cs">
+      <Compile Update="Views\TipCalculatorPage.xaml.cs">
         <DependentUpon>GridTipCalculator.xaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>

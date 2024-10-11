@@ -16,11 +16,11 @@
                   />
         <ShellContent ContentTemplate="{DataTemplate views:RestaurantsPage}" Title="Restaurants"
                       Icon="restaurant_icon.png"/>
-        <ShellContent ContentTemplate="{DataTemplate views:GridTipCalculator}" Title="Grid tip calculator"
+        <ShellContent ContentTemplate="{DataTemplate views:TipCalculatorPage}" Title="Grid tip calculator"
                       Icon="gridtipcalc.png"/>
-        <ShellContent ContentTemplate="{DataTemplate views:RotatingText}" Title="Rotating Text"
+        <ShellContent ContentTemplate="{DataTemplate views:RotatingTextPage}" Title="Rotating Text"
                       Icon="rotation_icon.png"/>
-        <ShellContent ContentTemplate="{DataTemplate views:ColorGridExample}" Title="Grids Example"
+        <ShellContent ContentTemplate="{DataTemplate views:ColorGridExamplePage}" Title="Grids Example"
                       Icon="grid_icon.png"/>
         <ShellContent ContentTemplate="{DataTemplate views:CalculatorPage}" Title="Calculator"
                       Icon="calculator_color.png"/>

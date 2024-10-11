@@ -5,13 +5,13 @@ using TipCalculator.Models;
 
 namespace TipCalculator.Views;
 
-public partial class GridTipCalculator : ContentPage
+public partial class TipCalculatorPage : ContentPage
 {
     private bool _roundedButtonClicked = false;
     private int _cultureCounter = 0;
     private Tip _tip;
     
-    public GridTipCalculator()
+    public TipCalculatorPage()
     {
         InitializeComponent();
         
@@ -34,7 +34,12 @@ public partial class GridTipCalculator : ContentPage
         SelectCurrencyBtn.Clicked += SelectChangeCultureInfo;
         DefaultTipValue.Clicked += OnDefaultTipValueClicked;
     }
-    
+
+    protected override void OnAppearing()
+    {
+        _tip.TipPct = Preferences.Get("TipPercentage", 15);
+    }
+
     private async void OnDefaultTipValueClicked(object? sender, EventArgs e)
     {
         _tip.TipPct = Preferences.Get("TipPercentage", 15);

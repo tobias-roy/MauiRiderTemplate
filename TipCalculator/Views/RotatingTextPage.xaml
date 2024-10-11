@@ -2,7 +2,7 @@
 
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TipCalculator.Views.RotatingText">
+             x:Class="TipCalculator.Views.RotatingTextPage">
     <ContentPage.Content>
         <Grid RowDefinitions="100, 100, 100, *" ColumnDefinitions="*" Padding="30, 0">
             <Slider Grid.Row="0" x:Name="DegreeSlider" Minimum="0" Maximum="90" Value="0" WidthRequest="200" />

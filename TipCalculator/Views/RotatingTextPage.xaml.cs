@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace TipCalculator.Views;
 
-public partial class RotatingText : ContentPage
+public partial class RotatingTextPage : ContentPage
 {
-    public RotatingText()
+    public RotatingTextPage()
     {
         InitializeComponent();
     }
