@@ -24,8 +24,8 @@ public partial class App : Application
     
     private async void RerouteOnStart()
     {
-            // var defaultStartPage = Preferences.Get("DefaultStartPage", "/tipcalculator");
+            var defaultStartPage = Preferences.Get("DefaultStartPage", "/tipcalculator");
             MainPage = new AppShell();
-            // await Shell.Current.GoToAsync(defaultStartPage);
+            await Shell.Current.GoToAsync(defaultStartPage);
     }
 }
