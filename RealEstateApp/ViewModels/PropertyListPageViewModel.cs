@@ -17,7 +17,13 @@ public class PropertyListPageViewModel : BaseViewModel
 
     private Command goToDetailsCommand;
 
+    private Command sortPropertiesCommand;
+
     private bool isRefreshing;
+
+    private Location userLocation = new();
+    private bool _isCheckingLocation;
+    private CancellationTokenSource _cancelTokenSource;
 
     public PropertyListPageViewModel(IPropertyService service)
     {
@@ -41,9 +47,13 @@ public class PropertyListPageViewModel : BaseViewModel
 
     public ICommand GoToAddPropertyCommand =>
         goToAddPropertyCommand ??= new Command(async () => await GotoAddProperty());
+    
+    public ICommand SortPropertiesCommand => sortPropertiesCommand ??= new Command( async () => await SortProperties());
 
     private async Task GetPropertiesAsync()
     {
+        List<Property> UnsortedProperties = new();
+        await GetCurrentLocation();
         if (IsBusy)
             return;
         try
@@ -56,7 +66,15 @@ public class PropertyListPageViewModel : BaseViewModel
                 PropertiesCollection.Clear();
 
             foreach (var property in properties)
+            {
+                property.Distance = CalculateDistance(property);
+                UnsortedProperties.Add(property);
+            }
+            var SortedProperties = UnsortedProperties.OrderByDescending(p => p.Distance).ToList();
+            foreach (var property in SortedProperties)
+            {
                 PropertiesCollection.Add(new PropertyListItem(property));
+            }
         }
         catch (Exception ex)
         {
@@ -69,6 +87,88 @@ public class PropertyListPageViewModel : BaseViewModel
             IsBusy = false;
             IsRefreshing = false;
         }
+    }
+
+    private async Task SortProperties()
+    {
+        List<Property> UnsortedProperties = new();
+        foreach (var property in PropertiesCollection)
+        {
+            UnsortedProperties.Add(property.Property);
+        }
+        if (PropertiesCollection.FirstOrDefault().Property.Distance > PropertiesCollection.Last().Property.Distance)
+        {
+            PropertiesCollection.Clear();
+            var SortedProperties = UnsortedProperties.OrderBy(p => p.Distance).ToList();
+            foreach (var property in SortedProperties)
+            {
+                PropertiesCollection.Add(new PropertyListItem(property));
+            }
+        }
+        else
+        {
+            PropertiesCollection.Clear();
+            var SortedProperties = UnsortedProperties.OrderByDescending(p => p.Distance).ToList();
+            foreach (var property in SortedProperties)
+            {
+                PropertiesCollection.Add(new PropertyListItem(property));
+            }
+        }
+    }
+
+    private double CalculateDistance(Property property)
+    {
+        var propertyLocation = new Location((double)property.Latitude, (double)property.Longitude);
+        return propertyLocation.CalculateDistance(userLocation, DistanceUnits.Kilometers);
+    }
+    
+    public async Task GetCurrentLocation()
+    {
+        try
+        {
+            _isCheckingLocation = true;
+
+            GeolocationRequest request = new GeolocationRequest(GeolocationAccuracy.Medium, TimeSpan.FromSeconds(10));
+
+            _cancelTokenSource = new CancellationTokenSource();
+
+            userLocation = await Geolocation.Default.GetLocationAsync(request, _cancelTokenSource.Token);
+        }
+
+        catch (Exception ex)
+        {
+            GetCachedLocation();
+        }
+        finally
+        {
+            _isCheckingLocation = false;
+        }
+    }
+    
+    public async Task<string> GetCachedLocation()
+    {
+        try
+        {
+            userLocation = await Geolocation.Default.GetLastKnownLocationAsync();
+        }
+        catch (FeatureNotSupportedException fnsEx)
+        {
+            // Handle not supported on device exception
+        }
+        catch (FeatureNotEnabledException fneEx)
+        {
+            // Handle not enabled on device exception
+        }
+        catch (PermissionException pEx)
+        {
+            // Handle permission exception
+        }
+        catch (Exception ex)
+        {
+            // Unable to get location
+        }
+
+        return "None";
     }
 
     private async Task GoToDetails(PropertyListItem propertyListItem)
