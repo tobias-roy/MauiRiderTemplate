@@ -10,11 +10,11 @@ namespace RealEstateApp.ViewModels;
 public class AddEditPropertyPageViewModel : BaseViewModel
 {
     private readonly IPropertyService service;
-
     private Command cancelSaveCommand;
-
-
     private Command savePropertyCommand;
+    private Command getCurrentLocationCommand;
+    private CancellationTokenSource _cancelTokenSource;
+    private bool _isCheckingLocation;
 
     public AddEditPropertyPageViewModel(IPropertyService service)
     {
@@ -22,9 +22,10 @@ public class AddEditPropertyPageViewModel : BaseViewModel
         Agents = new ObservableCollection<Agent>(service.GetAgents());
     }
 
+    public Location UserLocation { get; } = new();
+
     public string Mode { get; set; }
     public ICommand SavePropertyCommand => savePropertyCommand ??= new Command(async () => await SaveProperty());
-
     public ICommand CancelSaveCommand =>
         cancelSaveCommand ??= new Command(async () => await Shell.Current.GoToAsync(".."));
 
@@ -51,11 +52,80 @@ public class AddEditPropertyPageViewModel : BaseViewModel
             return false;
         return true;
     }
+    
+
+    public ICommand GetCurrentLocationCommand => getCurrentLocationCommand ??= new Command(async () => await GetCurrentLocation());
+    public async Task GetCurrentLocation()
+    {
+        try
+        {
+            _isCheckingLocation = true;
+
+            GeolocationRequest request = new GeolocationRequest(GeolocationAccuracy.Medium, TimeSpan.FromSeconds(10));
+
+            _cancelTokenSource = new CancellationTokenSource();
+
+            var location = await Geolocation.Default.GetLocationAsync(request, _cancelTokenSource.Token);
+
+            if (location != null)
+            {
+                UserLocation.Latitude = location.Latitude;
+                UserLocation.Longitude = location.Longitude;
+                OnPropertyChanged(nameof(UserLocation));
+            }
+        }
+
+        catch (Exception ex)
+        {
+            GetCachedLocation();
+        }
+        finally
+        {
+            _isCheckingLocation = false;
+        }
+    }
+    
+    public async Task<string> GetCachedLocation()
+    {
+        try
+        {
+            var location = await Geolocation.Default.GetLastKnownLocationAsync();
+            if (location != null)
+            {
+                UserLocation.Latitude = location.Latitude;
+                UserLocation.Longitude = location.Longitude;
+                OnPropertyChanged(nameof(UserLocation));
+            }
+        }
+        catch (FeatureNotSupportedException fnsEx)
+        {
+            // Handle not supported on device exception
+        }
+        catch (FeatureNotEnabledException fneEx)
+        {
+            // Handle not enabled on device exception
+        }
+        catch (PermissionException pEx)
+        {
+            // Handle permission exception
+        }
+        catch (Exception ex)
+        {
+            // Unable to get location
+        }
+
+        return "None";
+    }
+
+    public void CancelRequest()
+    {
+        if (_isCheckingLocation && _cancelTokenSource != null && _cancelTokenSource.IsCancellationRequested == false)
+            _cancelTokenSource.Cancel();
+    }
 
     #region PROPERTIES
 
     public ObservableCollection<Agent> Agents { get; }
-
     private Property _property;
 
     public Property Property

@@ -28,5 +28,7 @@
         </array>
         <key>XSAppIconAssets</key>
         <string>Assets.xcassets/appicon.appiconset</string>
+        <key>NSLocationWhenInUseUsageDescription</key>
+        <string>We spy on you.</string>
     </dict>
 </plist>

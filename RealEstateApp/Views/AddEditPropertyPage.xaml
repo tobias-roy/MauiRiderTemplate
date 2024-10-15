@@ -34,6 +34,21 @@
                         </Label.FormattedText>
                     </Label>
                     <Entry FontSize="Medium" Text="{Binding Property.Address}" />
+                    
+                    <Label FontSize="Medium">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span FontFamily="FA-solid" Text="{x:Static fa:IconFont.LocationArrow}" />
+                                <Span Text=" " />
+                                <Span Text="Location*" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Grid ColumnDefinitions="*, *, *" RowDefinitions="*">
+                        <Label Grid.Column="0" x:Name="LatitudeLabel" Text="{Binding UserLocation.Latitude}"></Label>
+                        <Label Grid.Column="1" x:Name="LongitudeLabel" Text="{Binding UserLocation.Longitude}"></Label>
+                        <Button Grid.Column="2" Text="{x:Static fa:IconFont.Thumbtack}" Command="{Binding GetCurrentLocationCommand}"></Button>
+                    </Grid>
 
                     <Label FontFamily="FA-solid" FontSize="Medium">
                         <Label.FormattedText>
