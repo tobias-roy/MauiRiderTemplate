@@ -4,7 +4,8 @@ namespace RealEstateApp.Views;
 
 public partial class PropertyListPage : ContentPage
 {
-    PropertyListPageViewModel vm;
+    private readonly PropertyListPageViewModel vm;
+
     public PropertyListPage(PropertyListPageViewModel vm)
     {
         InitializeComponent();

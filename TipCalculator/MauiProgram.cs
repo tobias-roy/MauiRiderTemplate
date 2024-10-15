@@ -1,7 +1,8 @@
-﻿using Microsoft.Extensions.Logging;
-using CommunityToolkit.Maui;
+﻿using CommunityToolkit.Maui;
+using Microsoft.Extensions.Logging;
 
 namespace TipCalculator;
+
 public static class MauiProgram
 {
     public static MauiApp CreateMauiApp()

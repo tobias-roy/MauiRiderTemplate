@@ -1,11 +1,10 @@
 ﻿using RealEstateApp.Models;
 
-namespace RealEstateApp.Services
+namespace RealEstateApp.Services;
+
+public interface IPropertyService
 {
-    public interface IPropertyService
-    {
-        List<Agent> GetAgents();
-        List<Property> GetProperties();
-        void SaveProperty(Property property);
-    }
+    List<Agent> GetAgents();
+    List<Property> GetProperties();
+    void SaveProperty(Property property);
 }

@@ -13,7 +13,7 @@
         The Mac App Store will NOT accept apps with ONLY maccatalyst-arm64 indicated;
         either BOTH runtimes must be indicated or ONLY macatalyst-x64. -->
         <!-- For example: <RuntimeIdentifiers>maccatalyst-x64;maccatalyst-arm64</RuntimeIdentifiers> -->
-<!--        <RuntimeIdentifiers>maccatalyst-x64;maccatalyst-arm64</RuntimeIdentifiers>-->
+        <!--        <RuntimeIdentifiers>maccatalyst-x64;maccatalyst-arm64</RuntimeIdentifiers>-->
         <OutputType>Exe</OutputType>
         <RootNamespace>TipCalculator</RootNamespace>
         <UseMaui>true</UseMaui>
@@ -58,72 +58,72 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="CommunityToolkit.Maui" Version="9.1.0" />
+        <PackageReference Include="CommunityToolkit.Maui" Version="9.1.0"/>
         <PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)"/>
         <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)"/>
         <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0"/>
     </ItemGroup>
 
     <ItemGroup>
-      <MauiXaml Update="Views\CalculatorPage.xaml">
-        <SubType>Designer</SubType>
-      </MauiXaml>
-      <MauiXaml Update="Views\ColorGridExamplePage.xaml">
-        <SubType>Designer</SubType>
-      </MauiXaml>
-      <MauiXaml Update="Views\TipCalculatorPage.xaml">
-        <SubType>Designer</SubType>
-      </MauiXaml>
-      <MauiXaml Update="Views\GridCellTestPage.xaml">
-        <SubType>Designer</SubType>
-      </MauiXaml>
-      <MauiXaml Update="Views\MainPage.xaml">
-        <SubType>Designer</SubType>
-      </MauiXaml>
-      <MauiXaml Update="Views\DetailsPage.xaml">
-        <SubType>Designer</SubType>
-      </MauiXaml>
-      <MauiXaml Update="Views\FeedbackPage.xaml">
-        <SubType>Designer</SubType>
-      </MauiXaml>
-      <MauiXaml Update="Views\AboutPage.xaml">
-        <SubType>Designer</SubType>
-      </MauiXaml>
+        <MauiXaml Update="Views\CalculatorPage.xaml">
+            <SubType>Designer</SubType>
+        </MauiXaml>
+        <MauiXaml Update="Views\ColorGridExamplePage.xaml">
+            <SubType>Designer</SubType>
+        </MauiXaml>
+        <MauiXaml Update="Views\TipCalculatorPage.xaml">
+            <SubType>Designer</SubType>
+        </MauiXaml>
+        <MauiXaml Update="Views\GridCellTestPage.xaml">
+            <SubType>Designer</SubType>
+        </MauiXaml>
+        <MauiXaml Update="Views\MainPage.xaml">
+            <SubType>Designer</SubType>
+        </MauiXaml>
+        <MauiXaml Update="Views\DetailsPage.xaml">
+            <SubType>Designer</SubType>
+        </MauiXaml>
+        <MauiXaml Update="Views\FeedbackPage.xaml">
+            <SubType>Designer</SubType>
+        </MauiXaml>
+        <MauiXaml Update="Views\AboutPage.xaml">
+            <SubType>Designer</SubType>
+        </MauiXaml>
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Update="Views\CalculatorPage.xaml.cs">
-        <DependentUpon>Calculator.xaml</DependentUpon>
-        <SubType>Code</SubType>
-      </Compile>
-      <Compile Update="Views\ColorGridExamplePage.xaml.cs">
-        <DependentUpon>GridExample.xaml</DependentUpon>
-        <SubType>Code</SubType>
-      </Compile>
-      <Compile Update="Views\TipCalculatorPage.xaml.cs">
-        <DependentUpon>GridTipCalculator.xaml</DependentUpon>
-        <SubType>Code</SubType>
-      </Compile>
-      <Compile Update="Views\GridCellTestPage.xaml.cs">
-        <DependentUpon>GridCellTest.xaml</DependentUpon>
-        <SubType>Code</SubType>
-      </Compile>
-      <Compile Update="Views\MainPage.xaml.cs">
-        <DependentUpon>MainPage.xaml</DependentUpon>
-        <SubType>Code</SubType>
-      </Compile>
-      <Compile Update="Views\DetailsPage.xaml.cs">
-        <DependentUpon>DetailsPage.xaml</DependentUpon>
-        <SubType>Code</SubType>
-      </Compile>
-      <Compile Update="Views\FeedBackPage.xaml.cs">
-        <DependentUpon>FeedBackPage.xaml</DependentUpon>
-        <SubType>Code</SubType>
-      </Compile>
-      <Compile Update="Views\AboutPage.xaml.cs">
-        <DependentUpon>About.xaml</DependentUpon>
-        <SubType>Code</SubType>
-      </Compile>
+        <Compile Update="Views\CalculatorPage.xaml.cs">
+            <DependentUpon>Calculator.xaml</DependentUpon>
+            <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Views\ColorGridExamplePage.xaml.cs">
+            <DependentUpon>GridExample.xaml</DependentUpon>
+            <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Views\TipCalculatorPage.xaml.cs">
+            <DependentUpon>GridTipCalculator.xaml</DependentUpon>
+            <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Views\GridCellTestPage.xaml.cs">
+            <DependentUpon>GridCellTest.xaml</DependentUpon>
+            <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Views\MainPage.xaml.cs">
+            <DependentUpon>MainPage.xaml</DependentUpon>
+            <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Views\DetailsPage.xaml.cs">
+            <DependentUpon>DetailsPage.xaml</DependentUpon>
+            <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Views\FeedBackPage.xaml.cs">
+            <DependentUpon>FeedBackPage.xaml</DependentUpon>
+            <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Views\AboutPage.xaml.cs">
+            <DependentUpon>About.xaml</DependentUpon>
+            <SubType>Code</SubType>
+        </Compile>
     </ItemGroup>
 
 </Project>

@@ -5,8 +5,7 @@
              xmlns:views="clr-namespace:TipCalculator.Views"
              x:Class="TipCalculator.Views.SettingsPage"
              x:DataType="views:SettingsPage"
-             HideSoftInputOnTapped="True"
-             >
+             HideSoftInputOnTapped="True">
     <ContentPage.Content>
         <TableView Intent="Settings" BackgroundColor="Transparent">
             <TableRoot>
@@ -17,7 +16,7 @@
                                 <Label WidthRequest="320" Padding="10, 0" VerticalTextAlignment="Center"
                                        TextColor="{AppThemeBinding Light=Black, Dark=White}" Text="Toggle Darkmode" />
                                 <Switch Toggled="OnToggled" HorizontalOptions="End"
-                                        VerticalOptions="Center" IsToggled="{Binding IsDarkModeOn}" >
+                                        VerticalOptions="Center" IsToggled="{Binding IsDarkModeOn}">
                                     <VisualStateManager.VisualStateGroups>
                                         <VisualStateGroupList>
                                             <VisualStateGroup x:Name="DarkModeStates">
@@ -43,11 +42,12 @@
                 </TableSection>
                 <TableSection>
                     <ViewCell>
-                        <ViewCell.View >
+                        <ViewCell.View>
                             <StackLayout Orientation="Horizontal" Padding="10, 0">
-                                <Label WidthRequest="280" Padding="10, 0" Text="Default Tip Percentage" VerticalTextAlignment="Center"
+                                <Label WidthRequest="280" Padding="10, 0" Text="Default Tip Percentage"
+                                       VerticalTextAlignment="Center"
                                        TextColor="{AppThemeBinding Light=Black, Dark=White}" />
-                                <Entry  MinimumWidthRequest="80" x:Name="TipPercentageEntry"
+                                <Entry MinimumWidthRequest="80" x:Name="TipPercentageEntry"
                                        Text="{Binding DefaultTipPercentage}"
                                        Keyboard="Numeric" WidthRequest="50" />
                             </StackLayout>
@@ -56,9 +56,9 @@
                 </TableSection>
                 <TableSection>
                     <ViewCell>
-                        <ViewCell.View >
+                        <ViewCell.View>
                             <StackLayout Orientation="Horizontal" Padding="10, 0">
-                                <Button x:Name="SelectDefaultStartPageBtn" Text="Set default startpage"/>
+                                <Button x:Name="SelectDefaultStartPageBtn" Text="Set default startpage" />
                             </StackLayout>
                         </ViewCell.View>
                     </ViewCell>

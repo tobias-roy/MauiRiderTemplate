@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
+
 <ContentPage
     x:Class="RealEstateApp.Views.PropertyListPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
@@ -10,7 +11,7 @@
     x:DataType="vm:PropertyListPageViewModel">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add" Command="{Binding GoToAddPropertyCommand}"/>
+        <ToolbarItem Text="Add" Command="{Binding GoToAddPropertyCommand}" />
     </ContentPage.ToolbarItems>
 
     <!-- <RefreshView Command="{Binding Source={RelativeSource AncestorType={x:Type vm:PropertyDetailPageViewModel}}, Path=getPropertiesCommand}"> -->
@@ -26,7 +27,9 @@
                     <Grid Padding="5">
                         <Frame HasShadow="True">
                             <Frame.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:PropertyListPageViewModel}}, Path=GoToDetailsCommand}" CommandParameter="{Binding .}" />
+                                <TapGestureRecognizer
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:PropertyListPageViewModel}}, Path=GoToDetailsCommand}"
+                                    CommandParameter="{Binding .}" />
                             </Frame.GestureRecognizers>
                             <Grid
                                 Margin="0"

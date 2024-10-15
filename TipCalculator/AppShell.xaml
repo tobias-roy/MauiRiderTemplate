@@ -1,41 +1,39 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
+
 <Shell
     x:Class="TipCalculator.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:TipCalculator"
     xmlns:views="clr-namespace:TipCalculator.Views"
     xmlns:controls="clr-namespace:TipCalculator.Controls"
-    Shell.TabBarIsVisible="False"
-    >
-    
+    Shell.TabBarIsVisible="False">
+
     <Shell.FlyoutHeader>
         <controls:FlyoutHeader />
     </Shell.FlyoutHeader>
-        <ShellContent ContentTemplate="{DataTemplate views:MainPage}" Title="Home"
-                  />
-        <ShellContent ContentTemplate="{DataTemplate views:RestaurantsPage}" Title="Restaurants"
-                      Icon="restaurant_icon.png"/>
-        <ShellContent ContentTemplate="{DataTemplate views:TipCalculatorPage}" Title="Grid tip calculator"
-                      Icon="gridtipcalc.png"/>
-        <ShellContent ContentTemplate="{DataTemplate views:RotatingTextPage}" Title="Rotating Text"
-                      Icon="rotation_icon.png"/>
-        <ShellContent ContentTemplate="{DataTemplate views:ColorGridExamplePage}" Title="Grids Example"
-                      Icon="grid_icon.png"/>
-        <ShellContent ContentTemplate="{DataTemplate views:CalculatorPage}" Title="Calculator"
-                      Icon="calculator_color.png"/>
-        <ShellContent ContentTemplate="{DataTemplate views:GridCellTestPage}" Title="Grid cell test"
-                      Icon="grid_cell.png"/>
-        
+    <ShellContent ContentTemplate="{DataTemplate views:MainPage}" Title="Home" />
+    <ShellContent ContentTemplate="{DataTemplate views:RestaurantsPage}" Title="Restaurants"
+                  Icon="restaurant_icon.png" />
+    <ShellContent ContentTemplate="{DataTemplate views:TipCalculatorPage}" Title="Grid tip calculator"
+                  Icon="gridtipcalc.png" />
+    <ShellContent ContentTemplate="{DataTemplate views:RotatingTextPage}" Title="Rotating Text"
+                  Icon="rotation_icon.png" />
+    <ShellContent ContentTemplate="{DataTemplate views:ColorGridExamplePage}" Title="Grids Example"
+                  Icon="grid_icon.png" />
+    <ShellContent ContentTemplate="{DataTemplate views:CalculatorPage}" Title="Calculator"
+                  Icon="calculator_color.png" />
+    <ShellContent ContentTemplate="{DataTemplate views:GridCellTestPage}" Title="Grid cell test"
+                  Icon="grid_cell.png" />
+
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
         <ShellContent ContentTemplate="{DataTemplate views:AboutPage}" Title="About"
-                      Icon="about.png"/>
+                      Icon="about.png" />
         <ShellContent ContentTemplate="{DataTemplate views:FeedBackPage}" Title="Feedback"
-                      Icon="feedback.png"/>
+                      Icon="feedback.png" />
     </FlyoutItem>
-        <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
-            <ShellContent ContentTemplate="{DataTemplate views:SettingsPage}" Title="Settings"
-                          Icon="settings.png"/>
-        </FlyoutItem>
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
+        <ShellContent ContentTemplate="{DataTemplate views:SettingsPage}" Title="Settings"
+                      Icon="settings.png" />
+    </FlyoutItem>
 
 </Shell>

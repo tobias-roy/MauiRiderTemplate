@@ -2,14 +2,15 @@
 using System.Runtime.CompilerServices;
 
 namespace RealEstateApp.Models;
+
 public class PropertyListItem : INotifyPropertyChanged
 {
+    private Property _property;
+
     public PropertyListItem(Property property)
     {
         Property = property;
     }
-
-    private Property _property;
 
     public Property Property
     {

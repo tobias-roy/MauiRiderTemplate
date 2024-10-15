@@ -5,8 +5,8 @@
              x:Class="TipCalculator.Views.FeedBackPage">
     <ContentPage.Content>
         <StackLayout>
-            <Entry x:Name="NameEntry" Placeholder="Enter your name"></Entry>
-            <Button x:Name="GoToDetailsPageBtn" Text="--> Details"></Button>
+            <Entry x:Name="NameEntry" Placeholder="Enter your name" />
+            <Button x:Name="GoToDetailsPageBtn" Text="--> Details" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

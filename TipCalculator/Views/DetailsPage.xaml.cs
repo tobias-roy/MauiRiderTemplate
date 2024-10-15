@@ -1,15 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace TipCalculator.Views;
 
 [QueryProperty(nameof(Name), "name")]
 public partial class DetailsPage : ContentPage
 {
-    private String name;
+    private string name;
+
+    public DetailsPage()
+    {
+        InitializeComponent();
+        BindingContext = this;
+    }
+
     public string Name
     {
         get => name;
@@ -19,11 +20,5 @@ public partial class DetailsPage : ContentPage
             OnPropertyChanged();
             NameLabel.Text = value;
         }
-    }
-    
-    public DetailsPage()
-    {
-        InitializeComponent();
-        BindingContext = this;
     }
 }

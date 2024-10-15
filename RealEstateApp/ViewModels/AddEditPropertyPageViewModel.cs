@@ -1,7 +1,7 @@
-﻿using RealEstateApp.Models;
-using RealEstateApp.Services;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
+using RealEstateApp.Models;
+using RealEstateApp.Services;
 
 namespace RealEstateApp.ViewModels;
 
@@ -9,7 +9,12 @@ namespace RealEstateApp.ViewModels;
 [QueryProperty(nameof(Property), "MyProperty")]
 public class AddEditPropertyPageViewModel : BaseViewModel
 {
-    readonly IPropertyService service;
+    private readonly IPropertyService service;
+
+    private Command cancelSaveCommand;
+
+
+    private Command savePropertyCommand;
 
     public AddEditPropertyPageViewModel(IPropertyService service)
     {
@@ -18,63 +23,16 @@ public class AddEditPropertyPageViewModel : BaseViewModel
     }
 
     public string Mode { get; set; }
-
-    #region PROPERTIES
-    public ObservableCollection<Agent> Agents { get; }
-
-    private Property _property;
-    public Property Property
-    {
-        get => _property;
-        set
-        {
-            SetProperty(ref _property, value);
-            Title = Mode == "newproperty" ? "Add Property" : "Edit Property";
-
-            if (_property.AgentId != null)
-            {
-                SelectedAgent = Agents.FirstOrDefault(x => x.Id == _property?.AgentId);
-            }
-        }
-    }
-
-    private Agent _selectedAgent;
-    public Agent SelectedAgent
-    {
-        get => _selectedAgent;
-        set
-        {
-            if (Property != null)
-            {
-                _selectedAgent = value;
-                Property.AgentId = _selectedAgent?.Id;
-            }
-        }
-    }
-
-    string statusMessage;
-    public string StatusMessage
-    {
-        get { return statusMessage; }
-        set { SetProperty(ref statusMessage, value); }
-    }
-
-    Color statusColor;
-    public Color StatusColor
-    {
-        get { return statusColor; }
-        set { SetProperty(ref statusColor, value); }
-    }
-    #endregion
-
-
-    private Command savePropertyCommand;
     public ICommand SavePropertyCommand => savePropertyCommand ??= new Command(async () => await SaveProperty());
+
+    public ICommand CancelSaveCommand =>
+        cancelSaveCommand ??= new Command(async () => await Shell.Current.GoToAsync(".."));
+
     private async Task SaveProperty()
     {
         if (IsValid() == false)
         {
-           StatusMessage = "Please fill in all required fields";
+            StatusMessage = "Please fill in all required fields";
             StatusColor = Colors.Red;
         }
         else
@@ -94,6 +52,54 @@ public class AddEditPropertyPageViewModel : BaseViewModel
         return true;
     }
 
-    private Command cancelSaveCommand;
-    public ICommand CancelSaveCommand => cancelSaveCommand ??= new Command(async () => await Shell.Current.GoToAsync(".."));
+    #region PROPERTIES
+
+    public ObservableCollection<Agent> Agents { get; }
+
+    private Property _property;
+
+    public Property Property
+    {
+        get => _property;
+        set
+        {
+            SetProperty(ref _property, value);
+            Title = Mode == "newproperty" ? "Add Property" : "Edit Property";
+
+            if (_property.AgentId != null) SelectedAgent = Agents.FirstOrDefault(x => x.Id == _property?.AgentId);
+        }
+    }
+
+    private Agent _selectedAgent;
+
+    public Agent SelectedAgent
+    {
+        get => _selectedAgent;
+        set
+        {
+            if (Property != null)
+            {
+                _selectedAgent = value;
+                Property.AgentId = _selectedAgent?.Id;
+            }
+        }
+    }
+
+    private string statusMessage;
+
+    public string StatusMessage
+    {
+        get => statusMessage;
+        set => SetProperty(ref statusMessage, value);
+    }
+
+    private Color statusColor;
+
+    public Color StatusColor
+    {
+        get => statusColor;
+        set => SetProperty(ref statusColor, value);
+    }
+
+    #endregion
 }

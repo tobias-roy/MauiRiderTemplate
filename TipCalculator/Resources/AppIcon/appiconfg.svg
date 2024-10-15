@@ -3,7 +3,9 @@
 <svg width="180" height="180" xmlns="http://www.w3.org/2000/svg">
     <g id="Layer_1">
         <title>Layer 1</title>
-        <text font-weight="bold" xml:space="preserve" text-anchor="start" font-family="'Changa'" font-size="90" id="svg_3" y="85.76923" x="35.51282" stroke-width="0" stroke="#000" fill="#0033ce">H4</text>
-        <text font-weight="bold" xml:space="preserve" text-anchor="start" font-family="'Changa'" font-size="60" id="svg_4" y="133.97436" x="22.94872" stroke-width="0" stroke="#000" fill="#0033ce">MAUI</text>
+        <text font-weight="bold" xml:space="preserve" text-anchor="start" font-family="'Changa'" font-size="90"
+              id="svg_3" y="85.76923" x="35.51282" stroke-width="0" stroke="#000" fill="#0033ce">H4</text>
+        <text font-weight="bold" xml:space="preserve" text-anchor="start" font-family="'Changa'" font-size="60"
+              id="svg_4" y="133.97436" x="22.94872" stroke-width="0" stroke="#000" fill="#0033ce">MAUI</text>
     </g>
 </svg>

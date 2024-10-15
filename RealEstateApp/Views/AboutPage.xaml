@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
+
 <ContentPage
     x:Class="RealEstateApp.Views.AboutPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
@@ -7,12 +8,9 @@
 
     <ContentPage.Resources>
         <ResourceDictionary>
-            <Color x:Key="Primary">#2196F3</Color>
-            <Color x:Key="Accent">#96d1ff</Color>
-            <Color x:Key="LightTextColor">#999999</Color>
         </ResourceDictionary>
     </ContentPage.Resources>
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -60,7 +58,8 @@
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
-                <Label Text="The original project is developed by David Broadfoot and is used in Pluralsight course 'Getting Started with Xamarin.Essentials Xamarin.Forms'." />
+                <Label
+                    Text="The original project is developed by David Broadfoot and is used in Pluralsight course 'Getting Started with Xamarin.Essentials Xamarin.Forms'." />
                 <Label Text="This version is edited for .NET MAUI by Egon Rasmussen (EUC Syd)" />
             </StackLayout>
         </ScrollView>

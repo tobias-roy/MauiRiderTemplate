@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
+
 <ContentPage
     x:Class="RealEstateApp.Views.AddEditPropertyPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:converters="clr-namespace:RealEstateApp.Converters"
     xmlns:fa="clr-namespace:FontAwesome"
-    xmlns:models="clr-namespace:RealEstateApp.Models"
     xmlns:vm="clr-namespace:RealEstateApp.ViewModels"
     Title="{Binding Title}"
     x:DataType="vm:AddEditPropertyPageViewModel">
@@ -44,7 +44,8 @@
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>
-                    <Entry FontSize="Medium" Text="{Binding Property.Price, Converter={converters:NullableIntConverter}}" />
+                    <Entry FontSize="Medium"
+                           Text="{Binding Property.Price, Converter={converters:NullableIntConverter}}" />
 
                     <Label FontSize="Medium">
                         <Label.FormattedText>

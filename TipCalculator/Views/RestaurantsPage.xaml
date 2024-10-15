@@ -7,27 +7,28 @@
              x:Class="TipCalculator.Views.RestaurantsPage"
              x:DataType="views:RestaurantsPage">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Clicked="AddRestaurant" Text="Add"/>
-        <ToolbarItem Clicked="DeleteRestaurant" Text="Delete"/>
+        <ToolbarItem Clicked="AddRestaurant" Text="Add" />
+        <ToolbarItem Clicked="DeleteRestaurant" Text="Delete" />
     </ContentPage.ToolbarItems>
-    
+
     <CollectionView SelectionMode="None" ItemsSource="{Binding RestaurantsList}">
-        <CollectionView.ItemTemplate >
+        <CollectionView.ItemTemplate>
             <DataTemplate x:DataType="models:Restaurant">
                 <Grid Padding="10">
                     <Frame HeightRequest="125" HasShadow="True">
                         <Frame.Shadow>
-                            <Shadow Brush="Black" Opacity="0.4" Offset="2,2.5" Radius="3"/>
+                            <Shadow Brush="Black" Opacity="0.4" Offset="2,2.5" Radius="3" />
                         </Frame.Shadow>
-                            <Grid Padding="0" ColumnDefinitions="125, *">
+                        <Grid Padding="0" ColumnDefinitions="125, *">
                             <Image Grid.Column="0" Aspect="AspectFill" HeightRequest="100" WidthRequest="100">
                                 <Image.Source>
-                                    <UriImageSource  Uri="{Binding ImageUrl}" CachingEnabled="True" CacheValidity="10:00:00:00" />
+                                    <UriImageSource Uri="{Binding ImageUrl}" CachingEnabled="True"
+                                                    CacheValidity="10:00:00:00" />
                                 </Image.Source>
                             </Image>
                             <StackLayout Grid.Column="1" Padding="10">
-                                <Label Text="{Binding Name}" FontSize="Large" FontAttributes="Bold"/>
-                                <Label Text="{Binding TipPct, StringFormat='Current tip: {0}'}" FontSize="Medium"/>
+                                <Label Text="{Binding Name}" FontSize="Large" FontAttributes="Bold" />
+                                <Label Text="{Binding TipPct, StringFormat='Current tip: {0}'}" FontSize="Medium" />
                             </StackLayout>
                         </Grid>
                     </Frame>

@@ -3,21 +3,24 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TipCalculator.Views.ColorGridExamplePage">
-    
+
     <ContentPage.Content>
         <Grid RowDefinitions="*, *" ColumnDefinitions="*, *">
             <Grid Grid.Row="0" Grid.Column="0" BackgroundColor="Aqua" RowDefinitions="*, *, *" ColumnDefinitions="*, *">
-                <BoxView Color="Red" Grid.Row="0" Grid.Column="0"></BoxView>
-                <BoxView Color="Black" Grid.Row="0" Grid.Column="1"></BoxView>
+                <BoxView Color="Red" Grid.Row="0" Grid.Column="0" />
+                <BoxView Color="Black" Grid.Row="0" Grid.Column="1" />
             </Grid>
-            <Grid Grid.Row="0" Grid.Column="1"  BackgroundColor="Blue" RowDefinitions="*, *, *" ColumnDefinitions="*, 2*, *">
-                <BoxView Color="Yellow" Grid.Row="1" Grid.Column="1"></BoxView>
+            <Grid Grid.Row="0" Grid.Column="1" BackgroundColor="Blue" RowDefinitions="*, *, *"
+                  ColumnDefinitions="*, 2*, *">
+                <BoxView Color="Yellow" Grid.Row="1" Grid.Column="1" />
             </Grid>
-            <Grid Grid.Row="1" Grid.Column="0"   BackgroundColor="Chartreuse" RowDefinitions="*, *, *" ColumnDefinitions="*, *">
-                <BoxView Color="Green" Grid.Row="0" Grid.Column="1"></BoxView>
+            <Grid Grid.Row="1" Grid.Column="0" BackgroundColor="Chartreuse" RowDefinitions="*, *, *"
+                  ColumnDefinitions="*, *">
+                <BoxView Color="Green" Grid.Row="0" Grid.Column="1" />
             </Grid>
-            <Grid Grid.Row="1" Grid.Column="1"  BackgroundColor="Chocolate" RowDefinitions="*, *, *" ColumnDefinitions="*, *">
-                <BoxView Color="Blue" Grid.Row="2" Grid.Column="2"></BoxView>
+            <Grid Grid.Row="1" Grid.Column="1" BackgroundColor="Chocolate" RowDefinitions="*, *, *"
+                  ColumnDefinitions="*, *">
+                <BoxView Color="Blue" Grid.Row="2" Grid.Column="2" />
             </Grid>
         </Grid>
     </ContentPage.Content>

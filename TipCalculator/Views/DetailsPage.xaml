@@ -3,11 +3,11 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TipCalculator.Views.DetailsPage">
-    
+
     <ContentPage.Content>
         <HorizontalStackLayout>
-            <Label Grid.Column="0" x:Name="WelcomeText" Text="Welcome, "></Label>
-            <Label Grid.Column="1" x:Name="NameLabel"></Label>
+            <Label x:Name="WelcomeText" Text="Welcome, " />
+            <Label x:Name="NameLabel" />
         </HorizontalStackLayout>
     </ContentPage.Content>
 </ContentPage>

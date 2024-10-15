@@ -1,16 +1,23 @@
-﻿using RealEstateApp.Models;
-using RealEstateApp.Services;
-using RealEstateApp.Views;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Windows.Input;
+using RealEstateApp.Models;
+using RealEstateApp.Services;
+using RealEstateApp.Views;
 
 namespace RealEstateApp.ViewModels;
+
 public class PropertyListPageViewModel : BaseViewModel
 {
-    public ObservableCollection<PropertyListItem> PropertiesCollection { get; } = new();
-
     private readonly IPropertyService service;
+
+    private Command getPropertiesCommand;
+
+    private Command goToAddPropertyCommand;
+
+    private Command goToDetailsCommand;
+
+    private bool isRefreshing;
 
     public PropertyListPageViewModel(IPropertyService service)
     {
@@ -18,17 +25,24 @@ public class PropertyListPageViewModel : BaseViewModel
         this.service = service;
     }
 
-    bool isRefreshing;
+    public ObservableCollection<PropertyListItem> PropertiesCollection { get; } = new();
+
     public bool IsRefreshing
     {
         get => isRefreshing;
         set => SetProperty(ref isRefreshing, value);
     }
 
-    private Command getPropertiesCommand;
-    public ICommand GetPropertiesCommand => getPropertiesCommand ??= new Command(async () => await GetPropertiesAsync());
+    public ICommand GetPropertiesCommand =>
+        getPropertiesCommand ??= new Command(async () => await GetPropertiesAsync());
 
-    async Task GetPropertiesAsync()
+    public ICommand GoToDetailsCommand => goToDetailsCommand ??=
+        new Command<PropertyListItem>(async propertyListItem => await GoToDetails(propertyListItem));
+
+    public ICommand GoToAddPropertyCommand =>
+        goToAddPropertyCommand ??= new Command(async () => await GotoAddProperty());
+
+    private async Task GetPropertiesAsync()
     {
         if (IsBusy)
             return;
@@ -36,14 +50,13 @@ public class PropertyListPageViewModel : BaseViewModel
         {
             IsBusy = true;
 
-            List<Property> properties = service.GetProperties();
+            var properties = service.GetProperties();
 
             if (PropertiesCollection.Count != 0)
                 PropertiesCollection.Clear();
 
-            foreach (Property property in properties)
+            foreach (var property in properties)
                 PropertiesCollection.Add(new PropertyListItem(property));
-
         }
         catch (Exception ex)
         {
@@ -58,26 +71,23 @@ public class PropertyListPageViewModel : BaseViewModel
         }
     }
 
-    private Command goToDetailsCommand;
-    public ICommand GoToDetailsCommand => goToDetailsCommand ??= new Command<PropertyListItem>(async (propertyListItem) => await GoToDetails(propertyListItem));
-    async Task GoToDetails(PropertyListItem propertyListItem)
+    private async Task GoToDetails(PropertyListItem propertyListItem)
     {
         if (propertyListItem == null)
             return;
 
         await Shell.Current.GoToAsync(nameof(PropertyDetailPage), true, new Dictionary<string, object>
         {
-            {"MyPropertyListItem", propertyListItem }
+            { "MyPropertyListItem", propertyListItem }
         });
     }
 
-    private Command goToAddPropertyCommand;
-    public ICommand GoToAddPropertyCommand => goToAddPropertyCommand ??= new Command(async () => await GotoAddProperty());
-    async Task GotoAddProperty()
+    private async Task GotoAddProperty()
     {
-        await Shell.Current.GoToAsync($"{nameof(AddEditPropertyPage)}?mode=newproperty", true, new Dictionary<string, object>
-        {
-            {"MyProperty", new Property() }
-        });
+        await Shell.Current.GoToAsync($"{nameof(AddEditPropertyPage)}?mode=newproperty", true,
+            new Dictionary<string, object>
+            {
+                { "MyProperty", new Property() }
+            });
     }
 }
