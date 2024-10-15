@@ -2,6 +2,7 @@
 using System.Windows.Input;
 using RealEstateApp.Models;
 using RealEstateApp.Services;
+using RealEstateApp.Views;
 
 namespace RealEstateApp.ViewModels;
 
@@ -13,6 +14,9 @@ public class AddEditPropertyPageViewModel : BaseViewModel
     private Command cancelSaveCommand;
     private Command savePropertyCommand;
     private Command getCurrentLocationCommand;
+    private Command getLocationFromAddressCommand;
+    private Command checkConnectivityCommand;
+    private Command setConnectivityCommand;
     private CancellationTokenSource _cancelTokenSource;
     private bool _isCheckingLocation;
 
@@ -23,12 +27,12 @@ public class AddEditPropertyPageViewModel : BaseViewModel
     }
 
     public Location UserLocation { get; } = new();
+    public bool HasService { get; set; }
 
     public string Mode { get; set; }
     public ICommand SavePropertyCommand => savePropertyCommand ??= new Command(async () => await SaveProperty());
     public ICommand CancelSaveCommand =>
         cancelSaveCommand ??= new Command(async () => await Shell.Current.GoToAsync(".."));
-
     private async Task SaveProperty()
     {
         if (IsValid() == false)
@@ -42,8 +46,7 @@ public class AddEditPropertyPageViewModel : BaseViewModel
             await Shell.Current.GoToAsync("///propertylist");
         }
     }
-
-    public bool IsValid()
+    bool IsValid()
     {
         if (string.IsNullOrEmpty(Property.Address)
             || Property.Beds == null
@@ -52,10 +55,37 @@ public class AddEditPropertyPageViewModel : BaseViewModel
             return false;
         return true;
     }
-    
+    public ICommand GetLocationFromAddress => getLocationFromAddressCommand ??= new Command(async () => await GetGpsLocationFromAddress());
+    async Task GetGpsLocationFromAddress()
+    {
+        try
+        {
+            string address = Property.Address;
+            if(address == null || address.Length < 3)
+            {
+                await Shell.Current.CurrentPage.DisplayAlert("Wrong address", "Please provide a valid address", "OK");
+            }
 
+            IEnumerable<Location> locations = await Geocoding.Default.GetLocationsAsync(address);
+            Location location = locations?.FirstOrDefault();
+            if (location != null)
+            {
+                UserLocation.Latitude = location.Latitude;
+                UserLocation.Longitude = location.Longitude;
+                OnPropertyChanged(nameof(UserLocation));
+            }
+        }
+
+        catch (Exception ex)
+        {
+        }
+        finally
+        {
+            _isCheckingLocation = false;
+        }
+    }
     public ICommand GetCurrentLocationCommand => getCurrentLocationCommand ??= new Command(async () => await GetCurrentLocation());
-    public async Task GetCurrentLocation()
+    async Task GetCurrentLocation()
     {
         try
         {
@@ -71,6 +101,14 @@ public class AddEditPropertyPageViewModel : BaseViewModel
             {
                 UserLocation.Latitude = location.Latitude;
                 UserLocation.Longitude = location.Longitude;
+                IEnumerable<Placemark> placemarks = await Geocoding.Default.GetPlacemarksAsync(location.Latitude, location.Longitude);
+                Property.Address =
+                    placemarks?.FirstOrDefault()?.FeatureName +
+                    ", " +
+                    placemarks?.FirstOrDefault()?.PostalCode +
+                    " " +
+                    placemarks?.FirstOrDefault()?.Locality;
+                OnPropertyChanged(nameof(Property));
                 OnPropertyChanged(nameof(UserLocation));
             }
         }
@@ -84,8 +122,29 @@ public class AddEditPropertyPageViewModel : BaseViewModel
             _isCheckingLocation = false;
         }
     }
-    
-    public async Task<string> GetCachedLocation()
+    public ICommand CheckConnectivityCommand => checkConnectivityCommand ??= new Command(async () => await CheckConnectivity());
+    async Task CheckConnectivity()
+    {
+        if (Connectivity.NetworkAccess != NetworkAccess.Internet)
+        {
+            await Shell.Current.CurrentPage.DisplayAlert("No internet", "Please check your internet connection", "OK");
+        }
+    }
+    public ICommand SetConnectivityCommand => setConnectivityCommand ??= new Command(async () => await SetConnectivity());
+    async Task SetConnectivity()
+    {
+        if (Connectivity.NetworkAccess != NetworkAccess.Internet)
+        {
+            HasService = false;
+            OnPropertyChanged(nameof(HasService));
+        }
+        else
+        {
+            HasService = true;
+            OnPropertyChanged(nameof(HasService));
+        }
+    }
+    async Task<string> GetCachedLocation()
     {
         try
         {
@@ -115,12 +174,6 @@ public class AddEditPropertyPageViewModel : BaseViewModel
         }
 
         return "None";
-    }
-
-    public void CancelRequest()
-    {
-        if (_isCheckingLocation && _cancelTokenSource != null && _cancelTokenSource.IsCancellationRequested == false)
-            _cancelTokenSource.Cancel();
     }
 
     #region PROPERTIES

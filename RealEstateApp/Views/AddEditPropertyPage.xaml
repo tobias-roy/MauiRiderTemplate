@@ -8,7 +8,8 @@
     xmlns:fa="clr-namespace:FontAwesome"
     xmlns:vm="clr-namespace:RealEstateApp.ViewModels"
     Title="{Binding Title}"
-    x:DataType="vm:AddEditPropertyPageViewModel">
+    x:DataType="vm:AddEditPropertyPageViewModel"
+    HideSoftInputOnTapped="True">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Command="{Binding CancelSaveCommand}" Text="Cancel" />
@@ -44,10 +45,11 @@
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>
-                    <Grid ColumnDefinitions="*, *, *" RowDefinitions="*">
+                    <Grid ColumnDefinitions="*, *, *, *" RowDefinitions="*" ColumnSpacing="4">
                         <Label Grid.Column="0" x:Name="LatitudeLabel" Text="{Binding UserLocation.Latitude}"></Label>
                         <Label Grid.Column="1" x:Name="LongitudeLabel" Text="{Binding UserLocation.Longitude}"></Label>
-                        <Button Grid.Column="2" FontFamily="FA-solid" Text="{x:Static fa:IconFont.Thumbtack}" Command="{Binding GetCurrentLocationCommand}"></Button>
+                        <Button Grid.Column="2" IsVisible="{Binding HasService}" FontFamily="FA-solid" Text="{x:Static fa:IconFont.Thumbtack}" Command="{Binding GetCurrentLocationCommand}"></Button>
+                        <Button Grid.Column="3" IsVisible="{Binding HasService}" FontFamily="FA-solid" Text="{x:Static fa:IconFont.Home}" Command="{Binding GetLocationFromAddress}"></Button>
                     </Grid>
 
                     <Label FontFamily="FA-solid" FontSize="Medium">
