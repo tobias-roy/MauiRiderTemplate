@@ -1,4 +1,5 @@
 ﻿using RealEstateApp.Views;
+using Application = Microsoft.Maui.Controls.PlatformConfiguration.WindowsSpecific.Application;
 
 namespace RealEstateApp;
 

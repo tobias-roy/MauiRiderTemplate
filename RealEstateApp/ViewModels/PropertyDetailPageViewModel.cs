@@ -55,7 +55,13 @@ public class PropertyDetailPageViewModel : BaseViewModel
         OnPropertyChanged(nameof(CanPlay));
         OnPropertyChanged(nameof(CanStopPlay));
         
-        await TextToSpeech.Default.SpeakAsync(Property.Description, cancelToken: cts.Token);
+        IEnumerable<Locale> locales = await TextToSpeech.Default.GetLocalesAsync();
+        SpeechOptions options = new SpeechOptions()
+        {
+            Locale = locales.Where(locales => locales.Language == "en-IN").FirstOrDefault(),
+        };
+        
+        await TextToSpeech.Default.SpeakAsync(Property.Description, options, cancelToken: cts.Token);
         
         CanPlay = true;
         CanStopPlay = false;

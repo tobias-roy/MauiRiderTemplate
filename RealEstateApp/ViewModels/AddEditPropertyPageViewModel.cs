@@ -17,19 +17,41 @@ public class AddEditPropertyPageViewModel : BaseViewModel
     private Command getLocationFromAddressCommand;
     private Command checkConnectivityCommand;
     private Command setConnectivityCommand;
+    private Command activateFlashlightCommand;
     private CancellationTokenSource _cancelTokenSource;
     private bool _isCheckingLocation;
+    private bool _flashLightOn;
+    public Location UserLocation { get; } = new();
+    public bool HasService { get; set; }
+    public string Mode { get; set; }
 
     public AddEditPropertyPageViewModel(IPropertyService service)
     {
         this.service = service;
         Agents = new ObservableCollection<Agent>(service.GetAgents());
+        Battery.Default.BatteryInfoChanged += OnBatteryInfoChanged;
     }
+    
+    private void OnBatteryInfoChanged(object sender, BatteryInfoChangedEventArgs e)
+    {
+        if (e.ChargeLevel >= 20)
+        {
+            StatusMessage = "Battery level is low";
+            StatusColor = Colors.Red;
+        }
+        if(e.PowerSource == BatteryPowerSource.AC)
+        {
+            StatusMessage = "Battery level is low - charging";
+            StatusColor = Colors.Yellow;
+        }
 
-    public Location UserLocation { get; } = new();
-    public bool HasService { get; set; }
-
-    public string Mode { get; set; }
+        if (Battery.Default.EnergySaverStatus == EnergySaverStatus.On)
+        {
+            StatusMessage = "Energy saver is on";
+            StatusColor = Colors.Green;
+        }
+    }
+    
     public ICommand SavePropertyCommand => savePropertyCommand ??= new Command(async () => await SaveProperty());
     public ICommand CancelSaveCommand =>
         cancelSaveCommand ??= new Command(async () => await Shell.Current.GoToAsync(".."));
@@ -37,8 +59,10 @@ public class AddEditPropertyPageViewModel : BaseViewModel
     {
         if (IsValid() == false)
         {
+            
             StatusMessage = "Please fill in all required fields";
             StatusColor = Colors.Red;
+            HapticResponse();
         }
         else
         {
@@ -54,6 +78,10 @@ public class AddEditPropertyPageViewModel : BaseViewModel
             || Property.AgentId == null)
             return false;
         return true;
+    }
+    void HapticResponse()
+    {
+        Vibration.Default.Vibrate();
     }
     public ICommand GetLocationFromAddress => getLocationFromAddressCommand ??= new Command(async () => await GetGpsLocationFromAddress());
     async Task GetGpsLocationFromAddress()
@@ -83,6 +111,37 @@ public class AddEditPropertyPageViewModel : BaseViewModel
         {
             _isCheckingLocation = false;
         }
+    }
+    async Task<string> GetCachedLocation()
+    {
+        try
+        {
+            var location = await Geolocation.Default.GetLastKnownLocationAsync();
+            if (location != null)
+            {
+                UserLocation.Latitude = location.Latitude;
+                UserLocation.Longitude = location.Longitude;
+                OnPropertyChanged(nameof(UserLocation));
+            }
+        }
+        catch (FeatureNotSupportedException fnsEx)
+        {
+            // Handle not supported on device exception
+        }
+        catch (FeatureNotEnabledException fneEx)
+        {
+            // Handle not enabled on device exception
+        }
+        catch (PermissionException pEx)
+        {
+            // Handle permission exception
+        }
+        catch (Exception ex)
+        {
+            // Unable to get location
+        }
+
+        return "None";
     }
     public ICommand GetCurrentLocationCommand => getCurrentLocationCommand ??= new Command(async () => await GetCurrentLocation());
     async Task GetCurrentLocation()
@@ -144,38 +203,50 @@ public class AddEditPropertyPageViewModel : BaseViewModel
             OnPropertyChanged(nameof(HasService));
         }
     }
-    async Task<string> GetCachedLocation()
+    public ICommand ActivateFlashlightCommand => activateFlashlightCommand ??= new Command(async () => await ActivateFlashlight());
+    async Task ActivateFlashlight()
     {
-        try
+        if (!_flashLightOn)
         {
-            var location = await Geolocation.Default.GetLastKnownLocationAsync();
-            if (location != null)
+            try
             {
-                UserLocation.Latitude = location.Latitude;
-                UserLocation.Longitude = location.Longitude;
-                OnPropertyChanged(nameof(UserLocation));
+                await Flashlight.TurnOnAsync();
+                _flashLightOn = true;
+            }
+            catch (FeatureNotSupportedException fnsEx)
+            {
+                // Handle not supported on device exception
+            }
+            catch (PermissionException pEx)
+            {
+                // Handle permission exception
+            }
+            catch (Exception ex)
+            {
+                // Unable to turn on flashlight
             }
         }
-        catch (FeatureNotSupportedException fnsEx)
+        else
         {
-            // Handle not supported on device exception
+            try
+            {
+                await Flashlight.TurnOffAsync();
+                _flashLightOn = false;
+            }
+            catch (FeatureNotSupportedException fnsEx)
+            {
+                // Handle not supported on device exception
+            }
+            catch (PermissionException pEx)
+            {
+                // Handle permission exception
+            }
+            catch (Exception ex)
+            {
+                // Unable to turn on flashlight
+            }
         }
-        catch (FeatureNotEnabledException fneEx)
-        {
-            // Handle not enabled on device exception
-        }
-        catch (PermissionException pEx)
-        {
-            // Handle permission exception
-        }
-        catch (Exception ex)
-        {
-            // Unable to get location
-        }
-
-        return "None";
     }
-
     #region PROPERTIES
 
     public ObservableCollection<Agent> Agents { get; }

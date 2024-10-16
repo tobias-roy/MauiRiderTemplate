@@ -145,7 +145,7 @@ public class PropertyListPageViewModel : BaseViewModel
         }
     }
     
-    public async Task<string> GetCachedLocation()
+    private async Task<string> GetCachedLocation()
     {
         try
         {

@@ -15,7 +15,7 @@
         <ApplicationTitle>RealEstateApp</ApplicationTitle>
 
         <!-- App Identifier -->
-        <ApplicationId>com.companyname.realestateapp</ApplicationId>
+        <ApplicationId>troy.h4.realestate</ApplicationId>
         <ApplicationIdGuid>b8414c88-6258-4bba-8270-fc327c7899d0</ApplicationIdGuid>
 
         <!-- Versions -->
