@@ -50,6 +50,10 @@
 
     <ItemGroup>
         <Compile Remove="Resources\Raw\IconFont.cs"/>
+        <Compile Update="Views\CompassPage.xaml.cs">
+          <DependentUpon>CompasPage.xaml</DependentUpon>
+          <SubType>Code</SubType>
+        </Compile>
     </ItemGroup>
 
     <ItemGroup>
@@ -90,6 +94,10 @@
         </MauiXaml>
         <MauiXaml Update="Views\PropertyListPage.xaml">
             <Generator>MSBuild:Compile</Generator>
+        </MauiXaml>
+        <MauiXaml Update="Views\CompassPage.xaml">
+          <SubType>Designer</SubType>
+          <Generator>MSBuild:Compile</Generator>
         </MauiXaml>
     </ItemGroup>
 
