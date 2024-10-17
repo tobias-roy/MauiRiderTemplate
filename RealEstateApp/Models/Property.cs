@@ -9,6 +9,8 @@ public class Property
         ImageUrls = new List<string>();
     }
 
+    public Vendor Vendor { get; set; }
+    public string NeighbourhoodUrl { get; set; }
     public string Id { get; set; }
     public string Address { get; set; }
     public int? Price { get; set; }

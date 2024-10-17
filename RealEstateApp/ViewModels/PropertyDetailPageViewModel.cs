@@ -10,18 +10,22 @@ public class PropertyDetailPageViewModel : BaseViewModel
 {
     private readonly IPropertyService service;
     private Agent agent;
+    private CancellationTokenSource cts;
     private Command editPropertyCommand;
+    private Command onEmailTappedCommand;
+    private Command onPhoneTappedCommand;
     private Command playDescriptionCommand;
-    private Command stopPlayDescriptionCommand;
     private Property property;
     private PropertyListItem propertyListItem;
-    public bool CanPlay { get; set; } = true;
-    public bool CanStopPlay { get; set; } = false;
-    CancellationTokenSource cts;
+    private Command stopPlayDescriptionCommand;
+
     public PropertyDetailPageViewModel(IPropertyService service)
     {
         this.service = service;
     }
+
+    public bool CanPlay { get; set; } = true;
+    public bool CanStopPlay { get; set; }
 
     public Property Property
     {
@@ -45,8 +49,17 @@ public class PropertyDetailPageViewModel : BaseViewModel
             Agent = service.GetAgents().FirstOrDefault(x => x.Id == Property.AgentId);
         }
     }
-    
-    public ICommand PlayDescriptionCommand => playDescriptionCommand ??= new Command(async () => await PlayDescriptionTextToSpeech());
+
+    public ICommand PlayDescriptionCommand =>
+        playDescriptionCommand ??= new Command(async () => await PlayDescriptionTextToSpeech());
+
+    public ICommand StopPlayDescriptionCommand => stopPlayDescriptionCommand ??= new Command(CancelSpeech);
+
+    public ICommand EditPropertyCommand => editPropertyCommand ??= new Command(async () => await GotoEditProperty());
+
+    public ICommand OnEmailTappedCommand => onEmailTappedCommand ??= new Command(async () => await OnEmailTapped());
+    public ICommand OnPhoneTappedCommand => onPhoneTappedCommand ??= new Command(async () => await OnPhoneTapped());
+
     private async Task PlayDescriptionTextToSpeech()
     {
         cts = new CancellationTokenSource();
@@ -54,36 +67,33 @@ public class PropertyDetailPageViewModel : BaseViewModel
         CanStopPlay = true;
         OnPropertyChanged(nameof(CanPlay));
         OnPropertyChanged(nameof(CanStopPlay));
-        
-        IEnumerable<Locale> locales = await TextToSpeech.Default.GetLocalesAsync();
-        SpeechOptions options = new SpeechOptions()
+
+        var locales = await TextToSpeech.Default.GetLocalesAsync();
+        var options = new SpeechOptions
         {
-            Locale = locales.Where(locales => locales.Language == "en-IN").FirstOrDefault(),
+            Locale = locales.Where(locales => locales.Language == "en-IN").FirstOrDefault()
         };
-        
-        await TextToSpeech.Default.SpeakAsync(Property.Description, options, cancelToken: cts.Token);
-        
+
+        await TextToSpeech.Default.SpeakAsync(Property.Description, options, cts.Token);
+
         CanPlay = true;
         CanStopPlay = false;
         OnPropertyChanged(nameof(CanPlay));
         OnPropertyChanged(nameof(CanStopPlay));
     }
-    
-    public ICommand StopPlayDescriptionCommand => stopPlayDescriptionCommand ??= new Command(CancelSpeech);
+
     public void CancelSpeech()
     {
         CanPlay = true;
         CanStopPlay = false;
         OnPropertyChanged(nameof(CanPlay));
         OnPropertyChanged(nameof(CanStopPlay));
-        
+
         if (cts?.IsCancellationRequested ?? true)
             return;
-    
+
         cts.Cancel();
     }
-
-    public ICommand EditPropertyCommand => editPropertyCommand ??= new Command(async () => await GotoEditProperty());
 
     private async Task GotoEditProperty()
     {
@@ -92,5 +102,40 @@ public class PropertyDetailPageViewModel : BaseViewModel
             {
                 { "MyProperty", property }
             });
+    }
+
+    private async Task OnEmailTapped()
+    {
+        if (Email.Default.IsComposeSupported)
+        {
+            var subject = "Hello friends!";
+            var body = "It was great to see you last weekend.";
+            string[] recipients = { property.Vendor.Email };
+
+            var message = new EmailMessage
+            {
+                Subject = subject,
+                Body = body,
+                BodyFormat = EmailBodyFormat.PlainText,
+                To = new List<string>(recipients)
+            };
+
+            await Email.Default.ComposeAsync(message);
+        }
+    }
+
+    private async Task OnPhoneTapped()
+    {
+        try
+        {
+            PhoneDialer.Open($"{property.Vendor.Phone}");
+        }
+        catch (FeatureNotSupportedException ex)
+        {
+            await Shell.Current.CurrentPage.DisplayAlert("Error", "Phone dialer is not supported on this device", "OK");
+        }
+        catch (Exception ex)
+        {
+        }
     }
 }

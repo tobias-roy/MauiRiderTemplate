@@ -16,7 +16,7 @@
     <ScrollView>
         <Grid
             Padding="15"
-            RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto"
+            RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto"
             RowSpacing="10">
             <Image
                 Grid.Row="0"
@@ -43,7 +43,7 @@
                     Grid.Column="0"
                     FontFamily="FA-solid"
                     FontSize="16"
-                    Text="{Static fa:IconFont.Bed}"
+                    Text="{x:Static fa:IconFont.Bed}"
                     VerticalOptions="Center" />
                 <Label
                     Grid.Column="1"
@@ -53,7 +53,7 @@
                     Grid.Column="2"
                     FontFamily="FA-solid"
                     FontSize="16"
-                    Text="{Static fa:IconFont.Bath}"
+                    Text="{x:Static fa:IconFont.Bath}"
                     VerticalOptions="Center" />
                 <Label
                     Grid.Column="3"
@@ -63,7 +63,7 @@
                     Grid.Column="4"
                     FontFamily="FA-solid"
                     FontSize="16"
-                    Text="{Static fa:IconFont.Parking}"
+                    Text="{x:Static fa:IconFont.Parking}"
                     VerticalOptions="Center" />
                 <Label
                     Grid.Column="5"
@@ -80,14 +80,15 @@
                     FontAttributes="Bold"
                     FontSize="14"
                     Text="Description:" />
-                <Button 
-                        IsVisible="{Binding CanPlay}"
-                        WidthRequest="50" 
-                        FontFamily="FA-solid" 
-                        Text="{x:Static fa:IconFont.Play}" 
-                        Command="{Binding PlayDescriptionCommand}"></Button>
-                <Button Grid.Row="5" IsVisible="{Binding CanStopPlay}" WidthRequest="50" FontFamily="FA-solid" Text="{x:Static fa:IconFont.Stop}" Command="{Binding StopPlayDescriptionCommand}"></Button>
-                
+                <Button
+                    IsVisible="{Binding CanPlay}"
+                    WidthRequest="50"
+                    FontFamily="FA-solid"
+                    Text="{x:Static fa:IconFont.Play}"
+                    Command="{Binding PlayDescriptionCommand}" />
+                <Button IsVisible="{Binding CanStopPlay}" WidthRequest="50" FontFamily="FA-solid"
+                        Text="{x:Static fa:IconFont.Stop}" Command="{Binding StopPlayDescriptionCommand}" />
+
             </HorizontalStackLayout>
 
             <Label
@@ -95,8 +96,36 @@
                 Margin="0,0,0,20"
                 FontSize="14"
                 Text="{Binding Property.Description}" />
+            <VerticalStackLayout Grid.Row="7">
+                <Label Text="Vendor:" />
+
+                <HorizontalStackLayout>
+                    <Label FontFamily="FA-solid" Text="{x:Static fa:IconFont.User}" />
+                    <Label Text="{Binding Property.Vendor.FullName}" />
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout>
+                    <HorizontalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding OnEmailTappedCommand}" />
+                    </HorizontalStackLayout.GestureRecognizers>
+                    <Label FontFamily="FA-solid"
+                           Text="{x:Static fa:IconFont.Envelope}" />
+                    <Label TextDecorations="Underline" TextColor="Blue" Text="{Binding Property.Vendor.Email}" />
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout>
+                    <HorizontalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding OnPhoneTappedCommand}" />
+                    </HorizontalStackLayout.GestureRecognizers>
+                    <Label FontFamily="FA-solid"
+                           Text="{x:Static fa:IconFont.Phone}" />
+                    <Label TextDecorations="Underline" TextColor="Blue" Text="{Binding Property.Vendor.Phone}" />
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+
+
             <Label
-                Grid.Row="7"
+                Grid.Row="8"
                 FontAttributes="Bold"
                 FontSize="14"
                 Text="Listed by:" />
