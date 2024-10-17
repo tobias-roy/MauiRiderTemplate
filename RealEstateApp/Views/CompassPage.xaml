@@ -8,111 +8,32 @@
     xmlns:models="clr-namespace:RealEstateApp.Models"
     xmlns:vm="clr-namespace:RealEstateApp.ViewModels"
     Title="PropertyListPage"
-    x:DataType="vm:CompassPageViewModel">
-
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add" Command="{Binding GoToAddPropertyCommand}" />
-        <ToolbarItem Command="{Binding SortPropertiesCommand}">
-            <ToolbarItem.IconImageSource>
-                <!-- Revisit and refactor this with a valueconverter -->
-                <FontImageSource
-                    FontFamily="FA-solid"
-                    Glyph="{x:Static fa:IconFont.SortAmountDown}"
-                    Size="Medium">
-                </FontImageSource>
-                </ToolbarItem.IconImageSource>
-        </ToolbarItem>
-    </ContentPage.ToolbarItems>
-
-    <RefreshView IsRefreshing="{Binding IsRefreshing}" Command="{Binding GetPropertiesCommand}">
-
-        <CollectionView
-            BackgroundColor="LightGray"
-            ItemsSource="{Binding PropertiesCollection}"
-            SelectionMode="None">
-
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="models:PropertyListItem">
-                    <Grid Padding="5">
-                        <Frame HasShadow="True">
-                            <Frame.GestureRecognizers>
-                                <TapGestureRecognizer
-                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:PropertyListPageViewModel}}, Path=GoToDetailsCommand}"
-                                    CommandParameter="{Binding .}" />
-                            </Frame.GestureRecognizers>
-                            <Grid
-                                Margin="0"
-                                Padding="0"
-                                BackgroundColor="White"
-                                ColumnDefinitions="Auto, *">
-                                <Image
-                                    Grid.Column="0"
-                                    Margin="0,0,10,0"
-                                    Aspect="AspectFit"
-                                    HeightRequest="120"
-                                    HorizontalOptions="Start"
-                                    Source="{Binding Property.MainImageUrl}" />
-                                <Grid
-                                    Grid.Column="1"
-                                    Margin="0,10,10,0"
-                                    RowDefinitions="Auto, Auto, Auto, Auto, Auto"
-                                    RowSpacing="10">
-                                    <Label
-                                        Grid.Row="0"
-                                        FontAttributes="Bold"
-                                        FontSize="14"
-                                        LineBreakMode="TailTruncation"
-                                        Text="{Binding Property.Address}" />
-                                    <Label
-                                        Grid.Row="1"
-                                        FontSize="13"
-                                        LineBreakMode="NoWrap"
-                                        Text="{Binding Property.Price, StringFormat='{0:C0}'}" />
-                                    <Grid Grid.Row="2" ColumnDefinitions="*, *, *, *, *, *">
-                                        <Label
-                                            Grid.Column="0"
-                                            FontFamily="FA-solid"
-                                            FontSize="15"
-                                            Text="{x:Static fa:IconFont.Bed}" />
-                                        <Label
-                                            Grid.Column="1"
-                                            FontSize="13"
-                                            Text="{Binding Property.Beds}" />
-                                        <Label
-                                            Grid.Column="2"
-                                            FontFamily="FA-solid"
-                                            FontSize="15"
-                                            Text="{x:Static fa:IconFont.Bath}" />
-                                        <Label
-                                            Grid.Column="3"
-                                            FontSize="13"
-                                            Text="{Binding Property.Baths}" />
-                                        <Label
-                                            Grid.Column="4"
-                                            FontFamily="FA-solid"
-                                            FontSize="15"
-                                            Text="{x:Static fa:IconFont.Parking}" />
-                                        <Label
-                                            Grid.Column="5"
-                                            FontSize="13"
-                                            Text="{Binding Property.Parking}" />
-                                    </Grid>
-                                    <Label
-                                        Grid.Row="3"
-                                        FontSize="13"
-                                        Text="{Binding Property.LandSize, StringFormat='Land Size: {0} &#x33a1;'}" />
-                                    <Label
-                                        Grid.Row="4"
-                                        FontSize="13"
-                                        Text="{Binding Property.Distance, StringFormat='{0:0.00} km away'}" />
-                                </Grid>
-                            </Grid>
-                        </Frame>
-                    </Grid>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-
-        </CollectionView>
-    </RefreshView>
-
+    x:DataType="vm:CompassPageViewModel"
+    Shell.PresentationMode="Modal"
+    >
+    <ContentPage.Content>
+        <Grid RowDefinitions="50, Auto,*,Auto" ColumnDefinitions="*" >
+        <Button Grid.Row="0" Command="{Binding BackCommand}" Text="Back" WidthRequest="70"/>
+            <Label Grid.Row="1" FontSize="Large" FontFamily="FA-solid" Margin="0,20" HorizontalOptions="Center">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span FontFamily="FA-solid" Text="{Static fa:IconFont.ArrowUp}"/>
+                        <Span Text=" " />
+                        <Span Text="{Binding CurrentAspect}" />
+                        <Span Text=" Aspect" />
+                        <Span Text=" " />
+                        <Span FontFamily="FA-solid" Text="{Static fa:IconFont.ArrowUp}"/>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <Image Source="compass.png" 
+                   Rotation="{Binding RotationAngle}" 
+                   Grid.Row="2" Grid.Column="0" 
+                   HorizontalOptions="Center"  />
+            <Label Text="{Binding CurrentHeading, StringFormat='Heading {0:N2}'}" 
+                   Margin="0,20" 
+                   Grid.Row="3" Grid.Column="0" 
+                   HorizontalOptions="Center" />
+        </Grid>
+    </ContentPage.Content>
 </ContentPage>

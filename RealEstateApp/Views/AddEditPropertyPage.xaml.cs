@@ -15,6 +15,7 @@ public partial class AddEditPropertyPage : ContentPage
     protected override void OnAppearing()
     {
         base.OnAppearing();
+        vm.OnAppearing();
         vm.SetConnectivityCommand.Execute(null);
     }
 }

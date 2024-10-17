@@ -18,6 +18,7 @@ public class AddEditPropertyPageViewModel : BaseViewModel
     private Command checkConnectivityCommand;
     private Command setConnectivityCommand;
     private Command activateFlashlightCommand;
+    private Command goToCompassCommand;
     private CancellationTokenSource _cancelTokenSource;
     private bool _isCheckingLocation;
     private bool _flashLightOn;
@@ -25,6 +26,11 @@ public class AddEditPropertyPageViewModel : BaseViewModel
     public bool HasService { get; set; }
     public string Mode { get; set; }
 
+    public void OnAppearing()
+    {
+        OnPropertyChanged(nameof(Property));
+    }
+    
     public AddEditPropertyPageViewModel(IPropertyService service)
     {
         this.service = service;
@@ -52,6 +58,18 @@ public class AddEditPropertyPageViewModel : BaseViewModel
         }
     }
     
+    public ICommand GoToCompassCommand => savePropertyCommand ??= new Command(async () => await NavigateToCompass());
+
+    async Task NavigateToCompass()
+    {
+        Dictionary<string, object> navparam = new Dictionary<string, object>()
+        {
+            {
+                nameof(Property), Property
+            }
+        };
+        await Shell.Current.GoToAsync($"compass", true, navparam);
+    }
     public ICommand SavePropertyCommand => savePropertyCommand ??= new Command(async () => await SaveProperty());
     public ICommand CancelSaveCommand =>
         cancelSaveCommand ??= new Command(async () => await Shell.Current.GoToAsync(".."));

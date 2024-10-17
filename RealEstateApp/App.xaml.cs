@@ -1,4 +1,6 @@
-﻿namespace RealEstateApp;
+﻿using RealEstateApp.Views;
+
+namespace RealEstateApp;
 
 public partial class App : Application
 {
@@ -8,6 +10,7 @@ public partial class App : Application
         MainPage = new AppShell();
         Connectivity.ConnectivityChanged += ConnectivityConnectivityChanged;
         App.Current.UserAppTheme = AppTheme.Light;
+        Routing.RegisterRoute("compass", typeof(CompassPage));
     }
     
     private async void ConnectivityConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
