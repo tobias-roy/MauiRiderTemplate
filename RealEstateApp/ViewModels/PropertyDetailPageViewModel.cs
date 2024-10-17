@@ -10,14 +10,16 @@ public class PropertyDetailPageViewModel : BaseViewModel
 {
     private readonly IPropertyService service;
     private Agent agent;
+    private Property property;
+    private PropertyListItem propertyListItem;
     private CancellationTokenSource cts;
     private Command editPropertyCommand;
     private Command onEmailTappedCommand;
     private Command onPhoneTappedCommand;
     private Command playDescriptionCommand;
-    private Property property;
-    private PropertyListItem propertyListItem;
     private Command stopPlayDescriptionCommand;
+    private Command openMapsCommand;
+    private Command openMapsNavigationCommand;
 
     public PropertyDetailPageViewModel(IPropertyService service)
     {
@@ -59,7 +61,24 @@ public class PropertyDetailPageViewModel : BaseViewModel
 
     public ICommand OnEmailTappedCommand => onEmailTappedCommand ??= new Command(async () => await OnEmailTapped());
     public ICommand OnPhoneTappedCommand => onPhoneTappedCommand ??= new Command(async () => await OnPhoneTapped());
+    public ICommand OpenMapsCommand => openMapsCommand ??= new Command(async () => await OpenMaps());
+    public ICommand OpenMapsNavigationCommand => openMapsNavigationCommand ??= new Command(async () => await OpenMapsNavigation());
 
+    private async Task OpenMaps()
+    {
+        var location = new Location((double)Property.Latitude, (double)Property.Longitude);
+        var options = new MapLaunchOptions { Name = Property.Address };
+        await Map.OpenAsync(location, options);
+    }
+    
+    private async Task OpenMapsNavigation()
+    {
+        var location = new Location((double)Property.Latitude, (double)Property.Longitude);
+        var options = new MapLaunchOptions { Name = Property.Address, NavigationMode = NavigationMode.Default};
+        await Map.OpenAsync(location, options);
+    }
+    
+    
     private async Task PlayDescriptionTextToSpeech()
     {
         cts = new CancellationTokenSource();

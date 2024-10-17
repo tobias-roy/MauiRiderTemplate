@@ -16,7 +16,7 @@
     <ScrollView>
         <Grid
             Padding="15"
-            RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto"
+            RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto"
             RowSpacing="10">
             <Image
                 Grid.Row="0"
@@ -96,7 +96,20 @@
                 Margin="0,0,0,20"
                 FontSize="14"
                 Text="{Binding Property.Description}" />
-            <VerticalStackLayout Grid.Row="7">
+
+            <HorizontalStackLayout Grid.Row="7">
+                <Button
+                    FontFamily="FA-solid"
+                    Text="{x:Static fa:IconFont.MapMarkedAlt}"
+                    Command="{Binding OpenMapsCommand}" />
+
+                <Button
+                    FontFamily="FA-solid"
+                    Text="{x:Static fa:IconFont.Directions}"
+                    Command="{Binding OpenMapsNavigationCommand}" />
+            </HorizontalStackLayout>
+
+            <VerticalStackLayout Grid.Row="8">
                 <Label Text="Vendor:" />
 
                 <HorizontalStackLayout>
@@ -125,11 +138,11 @@
 
 
             <Label
-                Grid.Row="8"
+                Grid.Row="9"
                 FontAttributes="Bold"
                 FontSize="14"
                 Text="Listed by:" />
-            <Grid Grid.Row="8" ColumnDefinitions="auto, *">
+            <Grid Grid.Row="10" ColumnDefinitions="auto, *">
                 <Image
                     Grid.Column="0"
                     Source="{Binding Agent.ImageUrl}"
