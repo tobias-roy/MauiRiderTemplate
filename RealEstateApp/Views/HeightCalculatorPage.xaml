@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:RealEstateApp.ViewModels"
+             xmlns:models="clr-namespace:RealEstateApp.Models"
+             x:Class="RealEstateApp.Views.HeightCalculatorPage"
+             x:DataType="vm:HeightCalculatorViewModel"
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+             HideSoftInputOnTapped="True">
+    <ContentPage.Content>
+        <VerticalStackLayout Spacing="10" WidthRequest="350">
+            <Label FontSize="20" Text="{Binding CurrentHeight, StringFormat='Current Altitude {0:N2}m'}" />
+            <Entry Placeholder="Measurement Label" Text="{Binding SaveLabel}" />
+            <Button Text="Save" Command="{Binding SaveBaromenterMeasurementCommand}" />
+            <CollectionView ItemsSource="{Binding BarometerMeasurementCollection}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:BarometerMeasurement">
+                        <SwipeView ios:SwipeView.SwipeTransitionMode="Drag">
+                            <SwipeView.RightItems>
+                                <SwipeItems>
+                                    <SwipeItem Text="Delete"
+                                               BackgroundColor="LightPink"
+                                               Command="{Binding Source={RelativeSource AncestorType={x:Type vm:HeightCalculatorViewModel}}, Path=DeleteMeasurementCommand}" 
+                                               CommandParameter="{Binding .}"/>
+                                </SwipeItems>
+                            </SwipeView.RightItems>
+                            <Border HeightRequest="50" Padding="10">
+                                <HorizontalStackLayout VerticalOptions="Center">
+                                    <Label Text="{Binding Display}" />
+                                    <Label Text="{Binding DisplayDifference}" />
+                                </HorizontalStackLayout>
+                            </Border>
+                        </SwipeView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Label Text="{Binding CurrentPressure, StringFormat='Current Pressure {0:N5} hPa'}" />
+        </VerticalStackLayout>
+    </ContentPage.Content>
+</ContentPage>
